@@ -1,0 +1,12 @@
+[Unit]
+Description=Run Julice Google Drive uploader every 5 minutes
+
+[Timer]
+OnBootSec=2min
+OnUnitActiveSec=5min
+AccuracySec=30s
+Persistent=true
+Unit=juara-gdrive-sync.service
+
+[Install]
+WantedBy=timers.target

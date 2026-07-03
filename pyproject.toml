@@ -1,0 +1,44 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "juara-wildlife-station"
+version = "0.1.0"
+description = "Autonomous Raspberry Pi audio, GPS/RTC, and environmental monitoring station."
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+  "tomli; python_version < '3.11'",
+]
+
+[project.optional-dependencies]
+pi = [
+  "adafruit-blinka",
+  "adafruit-circuitpython-bme280",
+  "adafruit-circuitpython-bme680",
+  "adafruit-circuitpython-scd4x",
+  "adafruit-circuitpython-veml7700",
+  "pigpio",
+  "pms5003",
+]
+birdnet = [
+  "birdnet-analyzer==2.4.0",
+]
+ai = [
+  "birdnet-analyzer==2.4.0",
+]
+dev = [
+  "pytest>=8.0",
+]
+
+[project.scripts]
+juara-station = "juara_station.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+addopts = "-q"

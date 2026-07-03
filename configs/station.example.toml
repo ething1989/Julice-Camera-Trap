@@ -1,0 +1,119 @@
+[location]
+latitude = -16.68260
+longitude = -56.90453
+country = "BRA"
+admin1_region = "BR-MT"
+timezone = "America/Cuiaba"
+
+[storage]
+root = "/mnt/juara_usb"
+fallback_root = "/var/lib/juara-station"
+state_root = "/var/lib/juara-station/state"
+work_root = "/tmp/juara-ai-work"
+recording_root = "/var/lib/juara-station/audio_recordings"
+logs_subdir = "."
+require_usb = false
+csv_filename = "Julice Camera Trap July 2026.csv"
+csv_profile = "julice_camera_trap"
+
+[schedule]
+interval_seconds = 300
+sensor_sample_seconds = 20
+night_start_hour = 18
+night_end_hour = 6
+audio_recording_disabled_start_hour = 1
+audio_recording_disabled_end_hour = 3
+audio_backlog_purge_hour = 3
+audio_backlog_purge_minute = 45
+post_audio_reboot_enabled = false
+post_audio_reboot_hour = 3
+post_audio_reboot_delay_seconds = 180
+post_audio_reboot_command = "/usr/bin/sudo -n /usr/sbin/reboot"
+startup_delay_seconds = 30
+usb_missing_reboot_seconds = 600
+cooldown_high_temp_c = 75.0
+cooldown_resume_temp_c = 70.0
+cooldown_consecutive_readings = 10
+cooldown_reboot_command = "/usr/bin/sudo -n /usr/sbin/reboot"
+sd_low_free_percent = 10.0
+
+[audio]
+enabled = true
+device = "plughw:CARD=Audio,DEV=0"
+record_command = "arecord"
+mixer_command = "amixer"
+capture_gain_percent = 100
+capture_gain_controls = ["Mic", "Capture"]
+delete_recordings_after_ai = true
+segment_seconds = 60
+
+[audio.day]
+sample_rate = 48000
+sample_format = "S32_LE"
+channels = 1
+
+[audio.night]
+sample_rate = 24000
+sample_format = "S16_LE"
+channels = 1
+
+[sensors]
+enabled = true
+bme280_address = 0x76
+veml7700_address = 0x10
+stagger_read_seconds = 5.0
+scd41_enabled = false
+uart_co2_enabled = false
+pms5003_enabled = false
+
+[time]
+gps_enabled = true
+gps_command = "gpspipe"
+rtc_read_command = "/usr/bin/sudo -n /usr/sbin/hwclock"
+rtc_write_enabled = true
+large_drift_minutes = 3.0
+small_drift_minutes = 1.0
+gps_large_drift_sync_count = 3
+coordinate_enabled = true
+coordinate_fix_count = 10
+coordinate_retry_seconds = 30
+coordinate_outlier_meters = 300.0
+coordinate_min_consistent_fraction = 0.8
+coordinate_max_distance_from_fallback_km = 0.0
+fallback_latitude = -16.68260
+fallback_longitude = -56.90453
+species_pack_root = "/opt/juara-wildlife-station/data/BirdNET_100mi_PrimaryPlus"
+active_species_list_path = "/var/lib/juara-station/state/juara-birdnet-species-list.txt"
+
+[birdnet]
+enabled = true
+backend = "birdnet"
+species_list_path = "/var/lib/juara-station/state/juara-birdnet-species-list.txt"
+species_filter_mode = "generated_list"
+run_in_station_service = false
+use_subprocess = false
+prewarm_at_start = true
+process_inline = false
+batch_min_files = 1
+batch_max_files = 1
+batch_max_wait_seconds = 3600
+night_batch_enabled = false
+night_batch_interval_seconds = 14400
+keep_work_outputs = false
+ffmpeg_command = "ffmpeg"
+audio_gain_db = 36.0
+min_confidence = 0.25
+candidate_min_confidence = 0.10
+sensitivity_day = 1.0
+sensitivity_night = 0.8
+overlap_day = 0.0
+overlap_night = 0.0
+workers = 1
+batch_size = 1
+fast_tflite = true
+sf_threshold = 0.005
+
+[drive_sync]
+enabled = true
+trigger_on_csv_export = true
+trigger_command = "/usr/bin/systemctl start --no-block juara-gdrive-sync.service"

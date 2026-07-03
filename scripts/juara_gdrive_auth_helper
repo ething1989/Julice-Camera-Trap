@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+if [ -f /etc/default/juara-gdrive-sync ]; then
+  # shellcheck disable=SC1091
+  . /etc/default/juara-gdrive-sync
+fi
+
+REMOTE_NAME="${JUARA_GDRIVE_REMOTE:-juara-gdrive}"
+REMOTE_DIR="${JUARA_GDRIVE_DIR:-Julice Camera Trap July 2026}"
+
+if ! command -v rclone >/dev/null 2>&1; then
+  echo "rclone is not installed"
+  exit 1
+fi
+
+mkdir -p "$HOME/.config/rclone"
+
+if ! rclone listremotes 2>/dev/null | grep -qx "${REMOTE_NAME}:"; then
+  rclone config create "$REMOTE_NAME" drive scope drive config_is_local false
+fi
+
+cat <<EOF
+
+Google Drive remote is named: ${REMOTE_NAME}
+Upload folder will be: ${REMOTE_DIR}
+
+If this remote still needs login, run:
+
+  rclone config reconnect ${REMOTE_NAME}:
+
+Then follow the Google login URL rclone prints. After login, test with:
+
+  juara_gdrive_sync
+
+EOF

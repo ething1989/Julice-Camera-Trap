@@ -1,0 +1,38 @@
+[location]
+latitude = -16.68260
+longitude = -56.90453
+country = "BRA"
+admin1_region = "BR-MT"
+timezone = "America/Cuiaba"
+
+[storage]
+root = ".local_run/usb"
+fallback_root = ".local_run/fallback"
+state_root = ".local_run/state"
+work_root = ".local_run/work"
+recording_root = ".local_run/audio"
+logs_subdir = "."
+require_usb = false
+csv_filename = "Julice Camera Trap July 2026.csv"
+csv_profile = "julice_camera_trap"
+
+[schedule]
+interval_seconds = 5
+sensor_sample_seconds = 1
+night_start_hour = 18
+night_end_hour = 6
+startup_delay_seconds = 0
+
+[time]
+rtc_write_enabled = false
+coordinate_enabled = true
+fallback_latitude = -16.68260
+fallback_longitude = -56.90453
+
+[birdnet]
+enabled = true
+python = ".venv/bin/python"
+batch_max_files = 1
+
+[drive_sync]
+enabled = false

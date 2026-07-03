@@ -1,0 +1,67 @@
+#!/usr/bin/env bash
+set -u
+
+if [ -f /etc/default/juara-gdrive-sync ]; then
+  # shellcheck disable=SC1091
+  . /etc/default/juara-gdrive-sync
+fi
+
+LOCAL_ROOT="${JUARA_LOCAL_ROOT:-/mnt/juara_usb}"
+REMOTE_NAME="${JUARA_GDRIVE_REMOTE:-juara-gdrive}"
+REMOTE_DIR="${JUARA_GDRIVE_DIR:-Julice Camera Trap July 2026}"
+LOG_PATH="${JUARA_GDRIVE_LOG:-/var/log/juara-gdrive-sync.log}"
+LOCK_PATH="${JUARA_GDRIVE_LOCK:-/run/lock/juara-gdrive-sync.lock}"
+
+log() {
+  printf '%s %s\n' "$(date -Is)" "$*" | tee -a "$LOG_PATH" >/dev/null
+}
+
+if ! command -v rclone >/dev/null 2>&1; then
+  log "rclone is not installed"
+  exit 0
+fi
+
+if [ ! -d "$LOCAL_ROOT" ]; then
+  log "local station folder missing: $LOCAL_ROOT"
+  exit 0
+fi
+
+if ! rclone listremotes 2>/dev/null | grep -qx "${REMOTE_NAME}:"; then
+  log "remote ${REMOTE_NAME}: is not configured yet"
+  exit 0
+fi
+
+if ! rclone about "${REMOTE_NAME}:" >/dev/null 2>&1; then
+  log "remote ${REMOTE_NAME}: is configured but not logged in yet"
+  exit 0
+fi
+
+mkdir -p "$(dirname "$LOCK_PATH")"
+exec 9>"$LOCK_PATH"
+if ! flock -n 9; then
+  log "previous sync still running"
+  exit 0
+fi
+
+log "starting CSV copy to ${REMOTE_NAME}:${REMOTE_DIR}"
+rclone copy "$LOCAL_ROOT" "${REMOTE_NAME}:${REMOTE_DIR}" \
+  --fast-list \
+  --transfers 2 \
+  --checkers 4 \
+  --retries 3 \
+  --low-level-retries 10 \
+  --include '*.csv' \
+  --include '*.CSV' \
+  --exclude '*' \
+  --exclude '*.wav' \
+  --exclude '*.tmp' \
+  --exclude '*.part' \
+  --log-file "$LOG_PATH" \
+  --log-level INFO
+status=$?
+if [ "$status" -eq 0 ]; then
+  log "CSV sync complete"
+else
+  log "sync failed with status $status"
+fi
+exit 0

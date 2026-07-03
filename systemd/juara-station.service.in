@@ -1,0 +1,26 @@
+[Unit]
+Description=Juara autonomous wildlife monitoring station
+After=local-fs.target gpsd.service
+Wants=gpsd.service
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+User=__USER__
+Group=__USER__
+SupplementaryGroups=audio video i2c gpio plugdev
+WorkingDirectory=__APP_DIR__
+Environment=PYTHONUNBUFFERED=1
+ExecStart=__APP_DIR__/.venv/bin/juara-station --config __CONFIG_PATH__ run
+ExecStop=/bin/sh -c 'mkdir -p /var/lib/juara-station/state && date -u +%%Y-%%m-%%dT%%H:%%M:%%SZ > /var/lib/juara-station/state/clean_shutdown.marker'
+Restart=always
+RestartSec=15
+KillSignal=SIGTERM
+TimeoutStopSec=20
+SendSIGKILL=yes
+Nice=5
+IOSchedulingClass=best-effort
+IOSchedulingPriority=6
+
+[Install]
+WantedBy=multi-user.target

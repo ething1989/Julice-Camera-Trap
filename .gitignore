@@ -1,0 +1,17 @@
+.venv/
+.local_run/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+*.egg-info/
+*.sqlite3
+*.sqlite3-*
+*.tmp
+.DS_Store
+.local-tests/
+live_sync/
+outputs/
+data/bird_playback_test/
+Photos/
+audio/
+media/audio/

@@ -1,0 +1,11 @@
+[Unit]
+Description=Julice Google Drive CSV uploader
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=__USER__
+Group=__USER__
+EnvironmentFile=-/etc/default/juara-gdrive-sync
+ExecStart=/usr/local/bin/juara_gdrive_sync

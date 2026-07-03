@@ -1,0 +1,7 @@
+[Unit]
+Description=Daily Juara station reboot
+
+[Service]
+Type=oneshot
+TimeoutStartSec=240
+ExecStart=/usr/local/bin/juara-planned-reboot

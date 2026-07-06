@@ -1,0 +1,12 @@
+[Unit]
+Description=Run Juara safe git update at boot and daily
+
+[Timer]
+OnBootSec=5min
+OnCalendar=*-*-* 03:10:00
+AccuracySec=5min
+Persistent=true
+Unit=juara-git-update.service
+
+[Install]
+WantedBy=timers.target

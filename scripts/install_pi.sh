@@ -358,7 +358,7 @@ install -m 0755 "$APP_DIR/scripts/juara_git_update" /usr/local/bin/juara_git_upd
 install -m 0755 "$APP_DIR/scripts/juara_networkpi_maintenance" /usr/local/bin/juara_networkpi_maintenance
 install -m 0755 "$APP_DIR/scripts/juara_wifi_watchdog" /usr/local/bin/juara_wifi_watchdog
 cat > /etc/default/juara-gdrive-sync <<EOF
-JUARA_LOCAL_ROOT=$USB_MOUNT
+JUARA_LOCAL_ROOT=/var/lib/juara-station/local
 JUARA_GDRIVE_REMOTE=$GDRIVE_REMOTE
 JUARA_GDRIVE_DIR=$GDRIVE_DIR
 JUARA_GDRIVE_LOG=/var/log/juara-gdrive-sync.log
@@ -397,6 +397,8 @@ install -m 0644 "$APP_DIR/systemd/juara-daily-reboot.service" /etc/systemd/syste
 install -m 0644 "$APP_DIR/systemd/juara-daily-reboot.timer" /etc/systemd/system/juara-daily-reboot.timer
 install -m 0644 "$APP_DIR/systemd/juara-networkpi-maintenance.service" /etc/systemd/system/juara-networkpi-maintenance.service
 install -m 0644 "$APP_DIR/systemd/juara-networkpi-maintenance.timer" /etc/systemd/system/juara-networkpi-maintenance.timer
+install -m 0644 "$APP_DIR/systemd/juara-git-update.service" /etc/systemd/system/juara-git-update.service
+install -m 0644 "$APP_DIR/systemd/juara-git-update.timer" /etc/systemd/system/juara-git-update.timer
 install -m 0644 "$APP_DIR/systemd/juara-service-hourly-reboot.service" /etc/systemd/system/juara-service-hourly-reboot.service
 install -m 0644 "$APP_DIR/systemd/juara-service-hourly-reboot.timer" /etc/systemd/system/juara-service-hourly-reboot.timer
 install -m 0644 "$APP_DIR/scripts/systemd/juara-wifi-watchdog.service" /etc/systemd/system/juara-wifi-watchdog.service
@@ -410,6 +412,7 @@ systemctl enable juara-ai-worker.service
 systemctl enable --now juara-gdrive-sync.timer
 systemctl enable --now juara-daily-reboot.timer
 systemctl enable --now juara-networkpi-maintenance.timer
+systemctl enable --now juara-git-update.timer
 systemctl enable --now juara-wifi-watchdog.timer
 systemctl disable --now juara-service-hourly-reboot.timer || true
 

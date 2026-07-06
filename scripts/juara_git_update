@@ -9,6 +9,8 @@ BACKUP_DIR="${JUARA_UPDATE_BACKUP_DIR:-/var/lib/juara-station/update-backups}"
 LOG_PATH="${JUARA_GIT_UPDATE_LOG:-/var/log/juara-git-update.log}"
 APP_USER="${JUARA_SERVICE_USER:-${USER:-pi}}"
 SKIP_BACKUP="${JUARA_SKIP_DEPLOY_BACKUP:-0}"
+CONFIG_PATH="${JUARA_STATION_CONFIG:-/etc/juara-station.toml}"
+GDRIVE_ENV="${JUARA_GDRIVE_ENV:-/etc/default/juara-gdrive-sync}"
 
 log() {
   printf '%s %s\n' "$(date -Is)" "$*" | tee -a "$LOG_PATH" >/dev/null
@@ -79,6 +81,73 @@ if [ -x "$DEPLOY_DIR/.venv/bin/python" ]; then
 from juara_station.config import load_config
 load_config("/etc/juara-station.toml")
 print("config import ok")
+PY
+fi
+
+if [ -f "$CONFIG_PATH" ]; then
+  CONFIG_PATH="$CONFIG_PATH" GDRIVE_ENV="$GDRIVE_ENV" python3 <<'PY' >>"$LOG_PATH" 2>&1 || true
+from pathlib import Path
+import os
+import re
+import shutil
+from datetime import datetime, timezone
+
+config = Path(os.environ["CONFIG_PATH"])
+text = config.read_text()
+lines = text.splitlines()
+out = []
+section = ""
+changed = []
+time_has_radius = False
+
+def backup_once():
+    backup = config.with_name(config.name + ".git-update-" + datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ"))
+    shutil.copy2(config, backup)
+    changed.insert(0, f"backup={backup}")
+
+def leave_time_section(next_section=None):
+    global time_has_radius
+    if section == "time" and not time_has_radius:
+        out.append("species_area_radius_km = 100.0")
+        changed.append("inserted time.species_area_radius_km=100.0")
+        time_has_radius = True
+    if next_section is not None:
+        out.append(next_section)
+
+for line in lines:
+    stripped = line.strip()
+    if stripped.startswith("[") and stripped.endswith("]"):
+        leave_time_section(line)
+        section = stripped.strip("[]").strip()
+        if section == "time":
+            time_has_radius = False
+        continue
+    if section == "storage" and re.match(r'^\s*root\s*=\s*"/mnt/juara_usb(/juara)?"\s*$', line):
+        out.append('root = "/var/lib/juara-station/local"')
+        changed.append("migrated storage.root to /var/lib/juara-station/local")
+        continue
+    if section == "time" and re.match(r"^\s*species_area_radius_km\s*=", line):
+        time_has_radius = True
+    out.append(line)
+
+leave_time_section()
+new_text = "\n".join(out) + ("\n" if text.endswith("\n") else "")
+if changed:
+    backup_once()
+    config.write_text(new_text)
+    print("config migration changed: " + "; ".join(changed))
+else:
+    print("config migration unchanged")
+
+gdrive_env = Path(os.environ["GDRIVE_ENV"])
+if gdrive_env.exists():
+    original = gdrive_env.read_text()
+    updated = re.sub(r"^JUARA_LOCAL_ROOT=.*$", "JUARA_LOCAL_ROOT=/var/lib/juara-station/local", original, flags=re.MULTILINE)
+    if "JUARA_LOCAL_ROOT=" not in updated:
+        updated += "\nJUARA_LOCAL_ROOT=/var/lib/juara-station/local\n"
+    if updated != original:
+        gdrive_env.write_text(updated)
+        print(f"updated {gdrive_env} local root")
 PY
 fi
 

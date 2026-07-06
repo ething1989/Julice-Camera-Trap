@@ -22,7 +22,7 @@ class LocationConfig:
 
 @dataclass(frozen=True)
 class StorageConfig:
-    root: Path = Path("/mnt/juara_usb")
+    root: Path = Path("/var/lib/juara-station/local")
     fallback_root: Path = Path("/var/lib/juara-station")
     state_root: Path | None = None
     work_root: Path | None = None
@@ -116,6 +116,7 @@ class TimeConfig:
     internet_coordinate_enabled: bool = True
     internet_coordinate_timeout_seconds: float = 4.0
     internet_coordinate_urls: list[str] = field(default_factory=list)
+    species_area_radius_km: float = 100.0
     species_pack_root: Path | None = None
     active_species_list_path: Path | None = None
 

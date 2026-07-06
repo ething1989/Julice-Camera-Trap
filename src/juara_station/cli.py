@@ -10,7 +10,7 @@ from .csv_exporter import export_day_csv
 from .geolocation import DEFAULT_GEOLOCATION_URLS, read_internet_location
 from .paths import resolve_paths
 from .service import StationService
-from .species_pack import write_active_species_list
+from .species_pack import write_active_species_list, write_birdnet_area_species_list
 from .storage import DataStore, to_utc_iso, utc_now
 
 
@@ -46,7 +46,7 @@ def main() -> None:
     doctor = sub.add_parser("doctor", help="Print resolved paths and basic runtime state.")
     doctor.set_defaults(func=_doctor)
 
-    species = sub.add_parser("select-species", help="Build the active BirdNET species list from a species pack.")
+    species = sub.add_parser("select-species", help="Build the active BirdNET species list from coordinates.")
     species.add_argument("--lat", type=float, default=None, help="Latitude; defaults to configured fallback latitude.")
     species.add_argument("--lon", type=float, default=None, help="Longitude; defaults to configured fallback longitude.")
     species.add_argument(
@@ -58,6 +58,12 @@ def main() -> None:
         "--write-coordinate-state",
         action="store_true",
         help="Persist the selected coordinates for the station service.",
+    )
+    species.add_argument(
+        "--radius-km",
+        type=float,
+        default=None,
+        help="Radius for BirdNET area species generation; defaults to config time.species_area_radius_km.",
     )
     species.set_defaults(func=_select_species)
 
@@ -185,9 +191,15 @@ def _select_species(args) -> None:
             f'  "updated_at_utc": "{to_utc_iso(utc_now())}"\n'
             "}\n"
         )
-    selection = write_active_species_list(pack_root, output_path, latitude, longitude)
+    radius_km = args.radius_km if args.radius_km is not None else config.time.species_area_radius_km
+    try:
+        selection = write_birdnet_area_species_list(output_path, latitude, longitude, radius_km=radius_km, week=-1)
+    except Exception:
+        logging.exception("BirdNET area species generation failed; falling back to local species pack")
+        selection = write_active_species_list(pack_root, output_path, latitude, longitude)
     print(f"coordinate_source={coordinate_source}")
     print(f"species_count={selection.species_count}")
+    print(f"source={selection.source}")
     print("nearest_cell_count=" + str(len(selection.cell_files)))
     print("cells=" + ",".join(selection.cell_files))
     print(f"output={output_path}")

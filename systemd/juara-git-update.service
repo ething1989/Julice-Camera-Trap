@@ -1,0 +1,8 @@
+[Unit]
+Description=Juara safe git update
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/juara_git_update

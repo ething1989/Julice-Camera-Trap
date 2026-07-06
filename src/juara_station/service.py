@@ -29,7 +29,11 @@ from .geolocation import DEFAULT_GEOLOCATION_URLS, read_internet_location
 from .paths import StationPaths, resolve_paths
 from .sensors import MockSensorSuite, SensorSuite, read_cpu_temp
 from .sound import MockYamNetRunner, YAMNET_SOURCE, YamNetRunner
-from .species_pack import write_active_species_list
+from .species_pack import (
+    write_active_species_list,
+    write_birdnet_area_species_list,
+    write_world_species_list,
+)
 from .storage import DataStore, SensorSample, from_iso, to_utc_iso, utc_now
 from .timekeeper import TimeKeeper
 
@@ -409,12 +413,12 @@ class StationService:
             return changed_days
 
         try:
-            selection = write_active_species_list(Path(pack_root), Path(output_path), latitude, longitude)
+            selection = self._rebuild_active_birdnet_species_list(pack_root, output_path, latitude, longitude, source)
             LOGGER.warning(
-                "Active BirdNET species list rebuilt from %s coordinates: %s species from %s nearest cells",
+                "Active BirdNET species list ready from %s coordinates: %s species, source=%s",
                 source,
                 selection.species_count,
-                len(selection.cell_files),
+                selection.source,
             )
         except Exception as exc:
             LOGGER.exception("Dynamic BirdNET species-list rebuild failed")
@@ -422,6 +426,38 @@ class StationService:
             self.store.add_interval_error(period_start, "Species List Failed", source="birdnet", details=str(exc))
             changed_days.add(period_start.astimezone(self.config.zoneinfo).date())
         return changed_days
+
+    def _rebuild_active_birdnet_species_list(
+        self,
+        pack_root: Path | None,
+        output_path: Path,
+        latitude: float,
+        longitude: float,
+        coordinate_source: str,
+    ):
+        output = Path(output_path)
+        if coordinate_source == "fallback":
+            if pack_root is None:
+                raise RuntimeError("No species pack configured for global fallback species list")
+            return write_world_species_list(Path(pack_root), output)
+
+        radius_km = max(1.0, float(self.config.time.species_area_radius_km))
+        try:
+            return write_birdnet_area_species_list(
+                output,
+                latitude,
+                longitude,
+                radius_km=radius_km,
+                week=-1,
+            )
+        except Exception:
+            LOGGER.exception(
+                "BirdNET %.0f km area species-list rebuild failed; falling back to local species pack",
+                radius_km,
+            )
+            if pack_root is None:
+                raise
+            return write_active_species_list(Path(pack_root), output, latitude, longitude)
 
     def _ensure_coordinate_retry_worker(self) -> None:
         if self.mock or self.ai_only:
@@ -491,7 +527,6 @@ class StationService:
             self._write_coordinate_state(latitude, longitude, "internet")
             return latitude, longitude, "internet", note
 
-        self._write_coordinate_state(fallback[0], fallback[1], "fallback")
         return fallback[0], fallback[1], "fallback", "GPS unavailable; using backup deployment coordinates"
 
     def _read_internet_coordinates(self) -> tuple[float, float, str] | None:
@@ -514,6 +549,8 @@ class StationService:
     def _read_coordinate_state(self) -> tuple[float, float] | None:
         data = _read_json_file(self._coordinate_state_path())
         try:
+            if str(data.get("source", "")).startswith("fallback"):
+                return None
             return float(data["latitude"]), float(data["longitude"])
         except (KeyError, TypeError, ValueError):
             return None

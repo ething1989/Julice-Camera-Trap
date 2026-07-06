@@ -6,7 +6,7 @@ if [ -f /etc/default/juara-gdrive-sync ]; then
   . /etc/default/juara-gdrive-sync
 fi
 
-LOCAL_ROOT="${JUARA_LOCAL_ROOT:-/mnt/juara_usb}"
+LOCAL_ROOT="${JUARA_LOCAL_ROOT:-/var/lib/juara-station/local}"
 REMOTE_NAME="${JUARA_GDRIVE_REMOTE:-juara-gdrive}"
 REMOTE_DIR="${JUARA_GDRIVE_DIR:-Julice Camera Trap July 2026}"
 LOG_PATH="${JUARA_GDRIVE_LOG:-/var/log/juara-gdrive-sync.log}"
@@ -69,6 +69,8 @@ run_with_timeout "CSV sync" "$COPY_TIMEOUT_SECONDS" \
   --checkers 4 \
   --retries 3 \
   --low-level-retries 10 \
+  --exclude '**/juara_environment_samples.csv' \
+  --exclude '**/juara_photo_diagnostics.csv' \
   --include '*.csv' \
   --include '*.CSV' \
   --exclude '*' \

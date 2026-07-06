@@ -6,6 +6,9 @@ TARGET_SSID="${JUARA_NETWORKPI_SSID:-NetworkPi}"
 SERVICE_USER="${JUARA_SERVICE_USER:-${USER:-pi}}"
 GDRIVE_ENV="${JUARA_GDRIVE_ENV:-/etc/default/juara-gdrive-sync}"
 SERVICE_REBOOT_TIMER="${JUARA_SERVICE_REBOOT_TIMER:-juara-service-hourly-reboot.timer}"
+USB_MOUNT="${JUARA_USB_MOUNT:-/mnt/juara_usb}"
+LOCAL_ROOT="${JUARA_LOCAL_ROOT:-/var/lib/juara-station/local}"
+USB_ROOT="${JUARA_USB_ROOT:-/mnt/juara_usb}"
 
 log() {
   printf '%s %s\n' "$(date -Is)" "$*" | tee -a "$LOG_PATH" >/dev/null
@@ -22,34 +25,80 @@ fi
 
 if [ "$active_ssid" != "$TARGET_SSID" ]; then
   systemctl disable --now "$SERVICE_REBOOT_TIMER" >/dev/null 2>&1 || true
-  log "skipping: active ssid is '${active_ssid:-unknown}', not $TARGET_SSID"
-  exit 0
-fi
-
-log "NetworkPi detected; running maintenance"
-if systemctl list-unit-files "$SERVICE_REBOOT_TIMER" >/dev/null 2>&1; then
-  systemctl enable --now "$SERVICE_REBOOT_TIMER" >/dev/null 2>&1 || true
-  log "service mode active; $SERVICE_REBOOT_TIMER enabled"
-fi
-
-if mountpoint -q /mnt/juara_usb && [ -d /var/lib/juara-station ]; then
-  for path in /var/lib/juara-station/*.csv /var/lib/juara-station/logs/*.csv; do
-    [ -e "$path" ] || continue
-    dest="/mnt/juara_usb/$(basename "$path")"
-    if [ ! -e "$dest" ] || [ "$(stat -c%s "$path" 2>/dev/null || echo 0)" -gt "$(stat -c%s "$dest" 2>/dev/null || echo 0)" ]; then
-      cp -f "$path" "$dest" && log "copied fallback csv $(basename "$path") to usb"
-    fi
-  done
-fi
-
-/usr/local/bin/juara_git_update || true
-
-if [ -x /usr/local/bin/juara_gdrive_sync ]; then
-  if [ -f "$GDRIVE_ENV" ]; then
-    sudo -u "$SERVICE_USER" env "HOME=/home/$SERVICE_USER" bash -lc "set -a; . '$GDRIVE_ENV'; set +a; /usr/local/bin/juara_gdrive_sync" || true
-  else
-    sudo -u "$SERVICE_USER" env "HOME=/home/$SERVICE_USER" /usr/local/bin/juara_gdrive_sync || true
+  log "run mode active; active ssid is '${active_ssid:-unknown}', not $TARGET_SSID"
+else
+  log "NetworkPi detected; running setup maintenance"
+  if systemctl list-unit-files "$SERVICE_REBOOT_TIMER" >/dev/null 2>&1; then
+    systemctl enable --now "$SERVICE_REBOOT_TIMER" >/dev/null 2>&1 || true
+    log "service mode active; $SERVICE_REBOOT_TIMER enabled"
   fi
 fi
+
+mount_usb() {
+  mkdir -p "$USB_MOUNT"
+  if mountpoint -q "$USB_MOUNT"; then
+    return 0
+  fi
+  mount "$USB_MOUNT" >/dev/null 2>&1 || true
+  mountpoint -q "$USB_MOUNT"
+}
+
+unmount_usb() {
+  sync
+  if mountpoint -q "$USB_MOUNT"; then
+    umount "$USB_MOUNT" >/dev/null 2>&1 || log "USB unmount skipped; mount is busy"
+  fi
+}
+
+copy_to_usb() {
+  if [ ! -d "$LOCAL_ROOT" ]; then
+    log "local station folder missing: $LOCAL_ROOT"
+    return 0
+  fi
+  mkdir -p "$USB_ROOT"
+  if command -v rsync >/dev/null 2>&1; then
+    rsync -a --delete \
+      --delete-excluded \
+      --exclude '**/juara_environment_samples.csv' \
+      --exclude '**/juara_photo_diagnostics.csv' \
+      --include '/*.csv' \
+      --include '/logs/' \
+      --include '/logs/*.csv' \
+      --include '/media/' \
+      --include '/media/photos/***' \
+      --include '/media/survey_photos/***' \
+      --include '/Photos/***' \
+      --include '/photos/***' \
+      --include '/survey_photos/***' \
+      --include '/SurveyPhotos/***' \
+      --include '/Survey Photos/***' \
+      --exclude '*' \
+      "$LOCAL_ROOT"/ "$USB_ROOT"/ >>"$LOG_PATH" 2>&1
+  else
+    log "rsync is not installed; skipped USB export to avoid copying debug files"
+    return 0
+  fi
+  log "USB export updated from $LOCAL_ROOT to $USB_ROOT"
+}
+
+if mount_usb; then
+  copy_to_usb
+else
+  log "USB is not mountable right now"
+fi
+
+if [ "$active_ssid" = "$TARGET_SSID" ]; then
+  /usr/local/bin/juara_git_update || true
+
+  if [ -x /usr/local/bin/juara_gdrive_sync ]; then
+    if [ -f "$GDRIVE_ENV" ]; then
+      sudo -u "$SERVICE_USER" env "HOME=/home/$SERVICE_USER" bash -lc "set -a; . '$GDRIVE_ENV'; set +a; /usr/local/bin/juara_gdrive_sync" || true
+    else
+      sudo -u "$SERVICE_USER" env "HOME=/home/$SERVICE_USER" /usr/local/bin/juara_gdrive_sync || true
+    fi
+  fi
+fi
+
+unmount_usb
 
 log "maintenance complete"

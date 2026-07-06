@@ -149,6 +149,19 @@ class BirdNetConfig:
 
 
 @dataclass(frozen=True)
+class YamNetConfig:
+    enabled: bool = False
+    python: str | None = None
+    model_path: str | None = None
+    class_map_path: str | None = None
+    ffmpeg_command: str = "ffmpeg"
+    min_confidence: float = 0.15
+    top_k: int = 8
+    max_audio_seconds: int = 30
+    subprocess_timeout_seconds: int = 600
+
+
+@dataclass(frozen=True)
 class DriveSyncConfig:
     enabled: bool = True
     trigger_on_csv_export: bool = True
@@ -164,6 +177,7 @@ class StationConfig:
     sensors: SensorConfig = field(default_factory=SensorConfig)
     time: TimeConfig = field(default_factory=TimeConfig)
     birdnet: BirdNetConfig = field(default_factory=BirdNetConfig)
+    yamnet: YamNetConfig = field(default_factory=YamNetConfig)
     drive_sync: DriveSyncConfig = field(default_factory=DriveSyncConfig)
 
     @property

@@ -25,8 +25,12 @@ pi = [
 birdnet = [
   "birdnet-analyzer==2.4.0",
 ]
+yamnet = [
+  "tensorflow; platform_machine == 'aarch64'",
+]
 ai = [
   "birdnet-analyzer==2.4.0",
+  "tensorflow; platform_machine == 'aarch64'",
 ]
 dev = [
   "pytest>=8.0",

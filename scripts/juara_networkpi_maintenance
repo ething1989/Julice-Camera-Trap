@@ -1,0 +1,55 @@
+#!/usr/bin/env bash
+set -u
+
+LOG_PATH="${JUARA_NETWORKPI_LOG:-/var/log/juara-networkpi-maintenance.log}"
+TARGET_SSID="${JUARA_NETWORKPI_SSID:-NetworkPi}"
+SERVICE_USER="${JUARA_SERVICE_USER:-${USER:-pi}}"
+GDRIVE_ENV="${JUARA_GDRIVE_ENV:-/etc/default/juara-gdrive-sync}"
+SERVICE_REBOOT_TIMER="${JUARA_SERVICE_REBOOT_TIMER:-juara-service-hourly-reboot.timer}"
+
+log() {
+  printf '%s %s\n' "$(date -Is)" "$*" | tee -a "$LOG_PATH" >/dev/null
+}
+
+active_connection="$(nmcli -t -f GENERAL.CONNECTION dev show wlan0 2>/dev/null | cut -d: -f2- || true)"
+active_ssid=""
+if [ -n "$active_connection" ] && [ "$active_connection" != "--" ]; then
+  active_ssid="$(nmcli -g 802-11-wireless.ssid connection show "$active_connection" 2>/dev/null || true)"
+fi
+if [ -z "$active_ssid" ]; then
+  active_ssid="$(nmcli -t -f ACTIVE,SSID dev wifi 2>/dev/null | awk -F: '$1=="yes"{print $2; exit}')"
+fi
+
+if [ "$active_ssid" != "$TARGET_SSID" ]; then
+  systemctl disable --now "$SERVICE_REBOOT_TIMER" >/dev/null 2>&1 || true
+  log "skipping: active ssid is '${active_ssid:-unknown}', not $TARGET_SSID"
+  exit 0
+fi
+
+log "NetworkPi detected; running maintenance"
+if systemctl list-unit-files "$SERVICE_REBOOT_TIMER" >/dev/null 2>&1; then
+  systemctl enable --now "$SERVICE_REBOOT_TIMER" >/dev/null 2>&1 || true
+  log "service mode active; $SERVICE_REBOOT_TIMER enabled"
+fi
+
+if mountpoint -q /mnt/juara_usb && [ -d /var/lib/juara-station ]; then
+  for path in /var/lib/juara-station/*.csv /var/lib/juara-station/logs/*.csv; do
+    [ -e "$path" ] || continue
+    dest="/mnt/juara_usb/$(basename "$path")"
+    if [ ! -e "$dest" ] || [ "$(stat -c%s "$path" 2>/dev/null || echo 0)" -gt "$(stat -c%s "$dest" 2>/dev/null || echo 0)" ]; then
+      cp -f "$path" "$dest" && log "copied fallback csv $(basename "$path") to usb"
+    fi
+  done
+fi
+
+/usr/local/bin/juara_git_update || true
+
+if [ -x /usr/local/bin/juara_gdrive_sync ]; then
+  if [ -f "$GDRIVE_ENV" ]; then
+    sudo -u "$SERVICE_USER" env "HOME=/home/$SERVICE_USER" bash -lc "set -a; . '$GDRIVE_ENV'; set +a; /usr/local/bin/juara_gdrive_sync" || true
+  else
+    sudo -u "$SERVICE_USER" env "HOME=/home/$SERVICE_USER" /usr/local/bin/juara_gdrive_sync || true
+  fi
+fi
+
+log "maintenance complete"

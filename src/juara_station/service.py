@@ -15,6 +15,7 @@ import subprocess
 import time
 import wave
 
+from .acoustic_indices import AcousticIndexResult, calculate_acoustic_indices
 from .ai import (
     BirdNetAudioJob,
     BirdNetRunner,
@@ -26,6 +27,7 @@ from .config import StationConfig, is_night
 from .csv_exporter import CsvExportOptions, export_day_csv
 from .paths import StationPaths, resolve_paths
 from .sensors import MockSensorSuite, SensorSuite, read_cpu_temp
+from .sound import MockYamNetRunner, YAMNET_SOURCE, YamNetRunner
 from .species_pack import write_active_species_list
 from .storage import DataStore, SensorSample, from_iso, to_utc_iso, utc_now
 from .timekeeper import TimeKeeper
@@ -47,6 +49,7 @@ class StationService:
         self.sensors = MockSensorSuite() if hardware_mock else SensorSuite(config.sensors)
         self.audio = MockAudioRecorder() if hardware_mock or not config.audio.enabled else AudioRecorder(config.audio)
         self.birdnet = MockBirdNetRunner() if mock else BirdNetRunner(config.birdnet, config.location)
+        self.yamnet = MockYamNetRunner() if mock else YamNetRunner(config.yamnet)
         self._ai_lock = Lock()
         self._audio_worker_stop = Event()
         self._audio_worker_lock = Lock()
@@ -263,6 +266,9 @@ class StationService:
                     self.process_audio_event(period_start, audio_result.path, night)
                 elif self.config.birdnet.run_in_station_service:
                     self._ensure_audio_worker()
+            elif audio_result.status == "recorded" and audio_result.path:
+                self._save_acoustic_indices(period_start, audio_result.path)
+                self._save_yamnet_detections(period_start, audio_result.path)
 
         self.store.upsert_interval_summary(period_start, period_end, reading.timestamp, reading.source, notes or None)
         if self._cooldown_just_entered:
@@ -331,6 +337,7 @@ class StationService:
             latitude=self._current_latitude,
             longitude=self._current_longitude,
             interval_seconds=self.config.schedule.interval_seconds,
+            birdnet_species_list_path=self.config.birdnet.species_list_path,
         )
 
     def _trigger_drive_sync(self, reason: str) -> None:
@@ -620,10 +627,30 @@ class StationService:
                 LOGGER.debug("AI worker cooldown stop command failed: %s", command, exc_info=True)
         LOGGER.warning("Unable to stop AI worker immediately for CPU cooldown; marker will stop the next cycle")
 
+    def _save_acoustic_indices(self, period_start: datetime, audio_path: Path) -> None:
+        try:
+            indices = calculate_acoustic_indices(audio_path)
+        except Exception as exc:
+            LOGGER.warning("Acoustic index calculation failed for %s: %s", audio_path, exc, exc_info=True)
+            indices = AcousticIndexResult.from_error(str(exc))
+        self.store.save_acoustic_indices(period_start, indices)
+
+    def _save_yamnet_detections(self, period_start: datetime, audio_path: Path) -> None:
+        if not self.config.yamnet.enabled:
+            return
+        try:
+            summary = self.yamnet.analyze_audio(audio_path)
+            self.store.save_sound_detections(period_start, YAMNET_SOURCE, summary.detections)
+        except Exception as exc:
+            LOGGER.warning("YAMNet analysis failed for %s: %s", audio_path, exc, exc_info=True)
+            self.store.save_sound_analysis_error(period_start, YAMNET_SOURCE, str(exc))
+
     def process_audio_event(self, period_start: datetime, audio_path: Path, night: bool) -> None:
         if not audio_path.exists():
             self._mark_missing_audio(period_start, audio_path)
             return
+        self._save_acoustic_indices(period_start, audio_path)
+        self._save_yamnet_detections(period_start, audio_path)
         output_dir = self.paths.ai_work_dir / "birdnet" / period_start.strftime("%Y%m%d_%H%M%S")
         try:
             self._set_birdnet_location(self._current_latitude, self._current_longitude)
@@ -710,6 +737,9 @@ class StationService:
                 if self._cooldown_marker_exists():
                     LOGGER.warning("Stopping BirdNET backlog before next batch because CPU cooldown marker is active")
                     break
+                for job, _row in group["jobs"]:
+                    self._save_acoustic_indices(job.period_start, job.audio_path)
+                    self._save_yamnet_detections(job.period_start, job.audio_path)
                 try:
                     self._set_birdnet_location(self._current_latitude, self._current_longitude)
                     batch_detections = self.birdnet.analyze_audio_batch(
@@ -759,6 +789,10 @@ class StationService:
     def _mark_missing_audio(self, period_start: datetime, audio_path: Path) -> None:
         LOGGER.warning("Skipping missing audio recording for %s: %s", period_start.isoformat(), audio_path)
         self.store.save_bird_calls(period_start, [])
+        self.store.save_acoustic_indices(
+            period_start,
+            AcousticIndexResult.from_error(f"Missing audio recording: {audio_path}"),
+        )
         self.store.upsert_audio_event(
             period_start,
             "missing_audio",

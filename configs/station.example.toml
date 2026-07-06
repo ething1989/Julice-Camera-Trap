@@ -113,6 +113,18 @@ batch_size = 1
 fast_tflite = true
 sf_threshold = 0.005
 
+[yamnet]
+enabled = true
+# Use a separate Python environment on the Pi if the station venv has incompatible NumPy/TFLite deps.
+# python = "/opt/juara-yamnet-venv/bin/python"
+model_path = "/opt/juara-wildlife-station/models/yamnet.tflite"
+class_map_path = "/opt/juara-wildlife-station/models/yamnet/assets/yamnet_class_map.csv"
+ffmpeg_command = "ffmpeg"
+min_confidence = 0.15
+top_k = 8
+max_audio_seconds = 300
+subprocess_timeout_seconds = 600
+
 [drive_sync]
 enabled = true
 trigger_on_csv_export = true

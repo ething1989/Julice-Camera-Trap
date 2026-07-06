@@ -1,0 +1,11 @@
+[Unit]
+Description=Juara WiFi reconnect watchdog
+After=NetworkManager.service
+Wants=NetworkManager.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/juara_wifi_watchdog
+Nice=10
+IOSchedulingClass=best-effort
+IOSchedulingPriority=7

@@ -1,0 +1,131 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+IFACE="${JUARA_WIFI_IFACE:-wlan0}"
+STATE_DIR="${JUARA_WIFI_STATE_DIR:-/var/lib/juara-station/state}"
+LOG_PATH="${JUARA_WIFI_LOG:-/var/log/juara-wifi-watchdog.log}"
+FAIL_FILE="$STATE_DIR/wifi_watchdog_failures"
+LOCK_PATH="${JUARA_WIFI_LOCK:-/run/lock/juara-wifi-watchdog.lock}"
+PING_TARGETS="${JUARA_WIFI_PING_TARGETS:-8.8.8.8 1.1.1.1}"
+NM_RESTART_AFTER_FAILURES="${JUARA_WIFI_NM_RESTART_AFTER_FAILURES:-5}"
+REBOOT_AFTER_FAILURES="${JUARA_WIFI_REBOOT_AFTER_FAILURES:-0}"
+
+mkdir -p "$STATE_DIR" "$(dirname "$LOG_PATH")" "$(dirname "$LOCK_PATH")"
+exec 9>"$LOCK_PATH"
+if ! flock -n 9; then
+  exit 0
+fi
+
+log() {
+  local message="$*"
+  logger -t juara-wifi-watchdog "$message" || true
+  printf '%s %s\n' "$(date -Is)" "$message" >> "$LOG_PATH" || true
+}
+
+failure_count() {
+  cat "$FAIL_FILE" 2>/dev/null || printf '0'
+}
+
+set_failure_count() {
+  printf '%s\n' "$1" > "$FAIL_FILE"
+}
+
+wifi_state() {
+  nmcli -t -f DEVICE,STATE dev status 2>/dev/null | awk -F: -v iface="$IFACE" '$1 == iface {print $2; exit}'
+}
+
+default_gateway() {
+  ip -4 route show default dev "$IFACE" 2>/dev/null | awk '/default/ {print $3; exit}'
+}
+
+ping_target() {
+  ping -I "$IFACE" -c 1 -W 3 "$1" >/dev/null 2>&1
+}
+
+has_connectivity() {
+  ip link show "$IFACE" >/dev/null 2>&1 || return 1
+  [ "$(wifi_state)" = "connected" ] || return 1
+  local gateway
+  gateway="$(default_gateway)"
+  if [ -n "$gateway" ] && ping_target "$gateway"; then
+    return 0
+  fi
+  local target
+  for target in $PING_TARGETS; do
+    if ping_target "$target"; then
+      return 0
+    fi
+  done
+  return 1
+}
+
+saved_wifi_connections_by_priority() {
+  nmcli -t -f NAME,TYPE,AUTOCONNECT,AUTOCONNECT-PRIORITY con show 2>/dev/null \
+    | awk -F: '$2 == "802-11-wireless" && $3 == "yes" {priority=$4; if (priority == "") priority=0; print priority "\t" $1}' \
+    | sort -rn \
+    | cut -f2-
+}
+
+try_connections() {
+  local name
+  saved_wifi_connections_by_priority | while IFS= read -r name; do
+    [ -n "$name" ] || continue
+    log "trying NetworkManager connection: $name"
+    if nmcli --wait 20 con up id "$name" ifname "$IFACE" >/dev/null 2>&1; then
+      log "NetworkManager connection succeeded: $name"
+      exit 0
+    fi
+  done
+}
+
+recover_wifi() {
+  log "wifi connectivity check failed on $IFACE; starting recovery"
+  nmcli radio wifi on >/dev/null 2>&1 || true
+  nmcli dev set "$IFACE" managed yes >/dev/null 2>&1 || true
+  nmcli con reload >/dev/null 2>&1 || true
+  nmcli dev wifi rescan ifname "$IFACE" >/dev/null 2>&1 || true
+  try_connections || true
+  if has_connectivity; then
+    log "wifi recovered without NetworkManager restart"
+    set_failure_count 0
+    exit 0
+  fi
+}
+
+if has_connectivity; then
+  set_failure_count 0
+  exit 0
+fi
+
+failures="$(failure_count)"
+case "$failures" in
+  ''|*[!0-9]*) failures=0 ;;
+esac
+failures=$((failures + 1))
+set_failure_count "$failures"
+recover_wifi
+
+if has_connectivity; then
+  log "wifi recovered after reconnect attempt"
+  set_failure_count 0
+  exit 0
+fi
+
+if [ "$NM_RESTART_AFTER_FAILURES" -gt 0 ] && [ "$failures" -ge "$NM_RESTART_AFTER_FAILURES" ]; then
+  log "wifi still down after $failures failures; restarting NetworkManager"
+  systemctl restart NetworkManager.service || true
+  sleep 20
+  if has_connectivity; then
+    log "wifi recovered after NetworkManager restart"
+    set_failure_count 0
+    exit 0
+  fi
+fi
+
+if [ "$REBOOT_AFTER_FAILURES" -gt 0 ] && [ "$failures" -ge "$REBOOT_AFTER_FAILURES" ]; then
+  log "wifi still down after $failures failures; rebooting as configured"
+  systemctl reboot || true
+fi
+
+log "wifi still down after recovery attempt; failures=$failures"
+exit 0

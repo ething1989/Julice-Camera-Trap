@@ -34,5 +34,8 @@ enabled = true
 python = ".venv/bin/python"
 batch_max_files = 1
 
+[yamnet]
+enabled = true
+
 [drive_sync]
 enabled = false

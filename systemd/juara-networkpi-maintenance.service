@@ -1,0 +1,8 @@
+[Unit]
+Description=Juara setup-network maintenance
+After=NetworkManager.service
+Wants=NetworkManager.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/juara_networkpi_maintenance

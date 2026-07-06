@@ -1,0 +1,6 @@
+[Unit]
+Description=Juara service-mode hourly reboot
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/juara-planned-reboot

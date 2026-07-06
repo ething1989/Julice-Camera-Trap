@@ -1,0 +1,11 @@
+[Unit]
+Description=Reboot hourly while the station is in NetworkPi service mode
+
+[Timer]
+OnUnitActiveSec=1h
+AccuracySec=2min
+Persistent=false
+Unit=juara-service-hourly-reboot.service
+
+[Install]
+WantedBy=timers.target

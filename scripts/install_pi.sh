@@ -354,11 +354,34 @@ chmod 0755 /usr/local/bin/juara-planned-reboot
 
 install -m 0755 "$APP_DIR/scripts/juara_gdrive_sync" /usr/local/bin/juara_gdrive_sync
 install -m 0755 "$APP_DIR/scripts/juara_gdrive_auth_helper" /usr/local/bin/juara_gdrive_auth_helper
+install -m 0755 "$APP_DIR/scripts/juara_git_update" /usr/local/bin/juara_git_update
+install -m 0755 "$APP_DIR/scripts/juara_networkpi_maintenance" /usr/local/bin/juara_networkpi_maintenance
+install -m 0755 "$APP_DIR/scripts/juara_wifi_watchdog" /usr/local/bin/juara_wifi_watchdog
 cat > /etc/default/juara-gdrive-sync <<EOF
 JUARA_LOCAL_ROOT=$USB_MOUNT
 JUARA_GDRIVE_REMOTE=$GDRIVE_REMOTE
 JUARA_GDRIVE_DIR=$GDRIVE_DIR
 JUARA_GDRIVE_LOG=/var/log/juara-gdrive-sync.log
+JUARA_GDRIVE_TRANSFERS=1
+JUARA_GDRIVE_CHECKERS=2
+JUARA_GDRIVE_RETRIES=8
+JUARA_GDRIVE_LOW_LEVEL_RETRIES=30
+JUARA_GDRIVE_RETRIES_SLEEP=2m
+JUARA_GDRIVE_CONNECT_TIMEOUT=60s
+JUARA_GDRIVE_IO_TIMEOUT=10m
+EOF
+cat > /etc/default/juara-git-update <<EOF
+JUARA_SERVICE_USER=$SERVICE_USER
+JUARA_GIT_REPO_URL=https://github.com/ething1989/Julice-Camera-Trap.git
+JUARA_GIT_BRANCH=main
+JUARA_GIT_CHECKOUT_DIR=/var/lib/juara-station/git/Julice-Camera-Trap
+JUARA_DEPLOY_DIR=$APP_DIR
+EOF
+cat > /etc/default/juara-networkpi-maintenance <<EOF
+JUARA_SERVICE_USER=$SERVICE_USER
+JUARA_NETWORKPI_SSID=NetworkPi
+JUARA_GDRIVE_ENV=/etc/default/juara-gdrive-sync
+JUARA_SERVICE_REBOOT_TIMER=juara-service-hourly-reboot.timer
 EOF
 touch /var/log/juara-gdrive-sync.log
 chown "$SERVICE_USER:$SERVICE_USER" /var/log/juara-gdrive-sync.log
@@ -372,6 +395,12 @@ sed "s#__USER__#$SERVICE_USER#g" \
 install -m 0644 "$APP_DIR/systemd/juara-gdrive-sync.timer" /etc/systemd/system/juara-gdrive-sync.timer
 install -m 0644 "$APP_DIR/systemd/juara-daily-reboot.service" /etc/systemd/system/juara-daily-reboot.service
 install -m 0644 "$APP_DIR/systemd/juara-daily-reboot.timer" /etc/systemd/system/juara-daily-reboot.timer
+install -m 0644 "$APP_DIR/systemd/juara-networkpi-maintenance.service" /etc/systemd/system/juara-networkpi-maintenance.service
+install -m 0644 "$APP_DIR/systemd/juara-networkpi-maintenance.timer" /etc/systemd/system/juara-networkpi-maintenance.timer
+install -m 0644 "$APP_DIR/systemd/juara-service-hourly-reboot.service" /etc/systemd/system/juara-service-hourly-reboot.service
+install -m 0644 "$APP_DIR/systemd/juara-service-hourly-reboot.timer" /etc/systemd/system/juara-service-hourly-reboot.timer
+install -m 0644 "$APP_DIR/scripts/systemd/juara-wifi-watchdog.service" /etc/systemd/system/juara-wifi-watchdog.service
+install -m 0644 "$APP_DIR/scripts/systemd/juara-wifi-watchdog.timer" /etc/systemd/system/juara-wifi-watchdog.timer
 
 systemctl daemon-reload
 systemctl enable gpsd.socket gpsd.service || true
@@ -380,6 +409,9 @@ systemctl enable juara-station.service
 systemctl enable juara-ai-worker.service
 systemctl enable --now juara-gdrive-sync.timer
 systemctl enable --now juara-daily-reboot.timer
+systemctl enable --now juara-networkpi-maintenance.timer
+systemctl enable --now juara-wifi-watchdog.timer
+systemctl disable --now juara-service-hourly-reboot.timer || true
 
 "$VENV_PYTHON" - <<'PY' || true
 import importlib.util

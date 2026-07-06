@@ -1,0 +1,86 @@
+#!/usr/bin/env bash
+set -u
+
+REPO_URL="${JUARA_GIT_REPO_URL:-https://github.com/ething1989/Julice-Camera-Trap.git}"
+BRANCH="${JUARA_GIT_BRANCH:-main}"
+CHECKOUT_DIR="${JUARA_GIT_CHECKOUT_DIR:-/var/lib/juara-station/git/Julice-Camera-Trap}"
+DEPLOY_DIR="${JUARA_DEPLOY_DIR:-/opt/juara-wildlife-station}"
+BACKUP_DIR="${JUARA_UPDATE_BACKUP_DIR:-/var/lib/juara-station/update-backups}"
+LOG_PATH="${JUARA_GIT_UPDATE_LOG:-/var/log/juara-git-update.log}"
+APP_USER="${JUARA_SERVICE_USER:-${USER:-pi}}"
+SKIP_BACKUP="${JUARA_SKIP_DEPLOY_BACKUP:-0}"
+
+log() {
+  printf '%s %s\n' "$(date -Is)" "$*" | tee -a "$LOG_PATH" >/dev/null
+}
+
+if ! command -v git >/dev/null 2>&1; then
+  log "git is not installed"
+  exit 0
+fi
+
+mkdir -p "$(dirname "$CHECKOUT_DIR")" "$BACKUP_DIR"
+
+if [ ! -d "$CHECKOUT_DIR/.git" ]; then
+  log "cloning $REPO_URL branch $BRANCH"
+  rm -rf "$CHECKOUT_DIR"
+  if ! git clone --depth 1 --branch "$BRANCH" "$REPO_URL" "$CHECKOUT_DIR" >>"$LOG_PATH" 2>&1; then
+    log "clone failed; keeping current deployment"
+    exit 0
+  fi
+else
+  log "checking for git updates in $CHECKOUT_DIR"
+  git -C "$CHECKOUT_DIR" remote set-url origin "$REPO_URL" >>"$LOG_PATH" 2>&1 || true
+  if ! git -C "$CHECKOUT_DIR" fetch --depth 1 origin "$BRANCH" >>"$LOG_PATH" 2>&1; then
+    log "fetch failed; keeping current deployment"
+    exit 0
+  fi
+  local_head="$(git -C "$CHECKOUT_DIR" rev-parse HEAD 2>/dev/null || true)"
+  remote_head="$(git -C "$CHECKOUT_DIR" rev-parse "origin/$BRANCH" 2>/dev/null || true)"
+  if [ -n "$local_head" ] && [ "$local_head" = "$remote_head" ]; then
+    log "already up to date at $local_head"
+    exit 0
+  fi
+  if ! git -C "$CHECKOUT_DIR" reset --hard "origin/$BRANCH" >>"$LOG_PATH" 2>&1; then
+    log "reset failed; keeping current deployment"
+    exit 0
+  fi
+fi
+
+new_head="$(git -C "$CHECKOUT_DIR" rev-parse HEAD 2>/dev/null || echo unknown)"
+stamp="$(date -u +%Y%m%dT%H%M%SZ)"
+
+if [ "$SKIP_BACKUP" = "1" ]; then
+  log "skipping deploy backup because JUARA_SKIP_DEPLOY_BACKUP=1"
+elif [ -d "$DEPLOY_DIR" ]; then
+  backup="$BACKUP_DIR/juara-wildlife-station-$stamp"
+  log "backing up $DEPLOY_DIR to $backup"
+  mkdir -p "$backup"
+  rsync -a --delete \
+    --exclude '.git/' \
+    --exclude '.venv/' \
+    --exclude '__pycache__/' \
+    --exclude '*.pyc' \
+    --exclude 'models/' \
+    "$DEPLOY_DIR/" "$backup/" >>"$LOG_PATH" 2>&1 || true
+fi
+
+log "deploying $new_head to $DEPLOY_DIR"
+mkdir -p "$DEPLOY_DIR"
+rsync -a --delete \
+  --exclude '.git/' \
+  --exclude '.venv/' \
+  "$CHECKOUT_DIR/" "$DEPLOY_DIR/" >>"$LOG_PATH" 2>&1
+
+if [ -x "$DEPLOY_DIR/.venv/bin/python" ]; then
+  "$DEPLOY_DIR/.venv/bin/python" -m pip install -e "$DEPLOY_DIR[pi,birdnet]" >>"$LOG_PATH" 2>&1 || \
+    "$DEPLOY_DIR/.venv/bin/python" -m pip install -e "$DEPLOY_DIR" >>"$LOG_PATH" 2>&1 || true
+  "$DEPLOY_DIR/.venv/bin/python" - <<'PY' >>"$LOG_PATH" 2>&1
+from juara_station.config import load_config
+load_config("/etc/juara-station.toml")
+print("config import ok")
+PY
+fi
+
+systemctl restart juara-station.service juara-ai-worker.service >>"$LOG_PATH" 2>&1 || true
+log "update complete at $new_head for $APP_USER"

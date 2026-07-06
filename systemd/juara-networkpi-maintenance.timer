@@ -1,0 +1,12 @@
+[Unit]
+Description=Run Juara setup-network maintenance every 30 minutes
+
+[Timer]
+OnBootSec=3min
+OnUnitActiveSec=30min
+AccuracySec=1min
+Persistent=true
+Unit=juara-networkpi-maintenance.service
+
+[Install]
+WantedBy=timers.target

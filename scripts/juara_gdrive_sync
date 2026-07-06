@@ -82,6 +82,13 @@ run_with_timeout "CSV sync" "$COPY_TIMEOUT_SECONDS" \
 status=$?
 if [ "$status" -eq 0 ]; then
   log "CSV sync complete"
+  run_with_timeout "remote CSV cleanup" "$COPY_TIMEOUT_SECONDS" \
+    rclone delete "${REMOTE_NAME}:${REMOTE_DIR}" \
+    --include '**/juara_environment_samples.csv' \
+    --include '**/juara_photo_diagnostics.csv' \
+    --exclude '*' \
+    --log-file "$LOG_PATH" \
+    --log-level INFO || true
 else
   log "sync failed with status $status"
 fi

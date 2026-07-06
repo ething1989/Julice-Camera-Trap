@@ -16,12 +16,22 @@ log() {
   printf '%s %s\n' "$(date -Is)" "$*" | tee -a "$LOG_PATH" >/dev/null
 }
 
+trust_git_dir() {
+  dir="$1"
+  if [ -n "$dir" ]; then
+    git config --global --get-all safe.directory | grep -Fx "$dir" >/dev/null 2>&1 || \
+      git config --global --add safe.directory "$dir" >/dev/null 2>&1 || true
+  fi
+}
+
 if ! command -v git >/dev/null 2>&1; then
   log "git is not installed"
   exit 0
 fi
 
 mkdir -p "$(dirname "$CHECKOUT_DIR")" "$BACKUP_DIR"
+trust_git_dir "$CHECKOUT_DIR"
+trust_git_dir "$DEPLOY_DIR"
 
 if [ ! -d "$CHECKOUT_DIR/.git" ]; then
   log "cloning $REPO_URL branch $BRANCH"

@@ -31,6 +31,7 @@ from .sensors import MockSensorSuite, SensorSuite, read_cpu_temp
 from .sound import MockYamNetRunner, YAMNET_SOURCE, YamNetRunner
 from .species_pack import (
     write_active_species_list,
+    write_area_species_list_from_pack,
     write_birdnet_area_species_list,
     write_world_species_list,
 )
@@ -442,6 +443,14 @@ class StationService:
             return write_world_species_list(Path(pack_root), output)
 
         radius_km = max(1.0, float(self.config.time.species_area_radius_km))
+        if pack_root is not None:
+            return write_area_species_list_from_pack(
+                Path(pack_root),
+                output,
+                latitude,
+                longitude,
+                radius_km=radius_km,
+            )
         try:
             return write_birdnet_area_species_list(
                 output,

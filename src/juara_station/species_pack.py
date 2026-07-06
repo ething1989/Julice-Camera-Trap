@@ -77,6 +77,59 @@ def write_active_species_list(
     return selection
 
 
+def write_area_species_list_from_pack(
+    pack_root: Path,
+    output_path: Path,
+    latitude: float,
+    longitude: float,
+    *,
+    radius_km: float = 100.0,
+) -> SpeciesPackSelection:
+    """Build a fast local area list from the bundled offline cell pack."""
+    pack_root = Path(pack_root)
+    sample_points = _area_sample_points(latitude, longitude, radius_km)
+    cells = _load_cells(pack_root)
+    if not cells:
+        raise FileNotFoundError(f"No cell index rows found in {pack_root / 'metadata' / 'cell_index.csv'}")
+
+    selected_cells: dict[str, dict[str, str]] = {}
+    for point_lat, point_lon, _label in sample_points:
+        nearest = min(
+            cells,
+            key=lambda row: _haversine_km(point_lat, point_lon, float(row["center_lat"]), float(row["center_lon"])),
+        )
+        selected_cells[nearest["file"]] = nearest
+
+    species: set[str] = set()
+    for relative in sorted(selected_cells):
+        species.update(_read_species_file(pack_root / relative))
+
+    selected = sorted(value for value in species if value)
+    if not selected:
+        raise RuntimeError("Offline area species-pack filter produced no species")
+    atomic_replace_text(Path(output_path), "\n".join(selected) + "\n")
+    selection = SpeciesPackSelection(
+        latitude=latitude,
+        longitude=longitude,
+        cell_files=tuple(sorted(selected_cells)),
+        species_count=len(selected),
+        source="species_pack_area",
+    )
+    metadata = {
+        "latitude": selection.latitude,
+        "longitude": selection.longitude,
+        "cell_files": list(selection.cell_files),
+        "species_count": selection.species_count,
+        "source": selection.source,
+        "filter": "offline_species_pack_area",
+        "radius_km": radius_km,
+        "sample_point_count": len(sample_points),
+        "note": "Fast offline 100 km area filter from bundled BirdNET species-pack cells; not a manual species blacklist.",
+    }
+    atomic_replace_text(Path(output_path).with_suffix(Path(output_path).suffix + ".metadata.json"), _json(metadata))
+    return selection
+
+
 def write_world_species_list(pack_root: Path, output_path: Path) -> SpeciesPackSelection:
     pack_root = Path(pack_root)
     species = _read_species_file(pack_root / "regions" / "world.txt")

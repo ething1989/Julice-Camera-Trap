@@ -359,8 +359,8 @@ install -m 0755 "$APP_DIR/scripts/juara_networkpi_maintenance" /usr/local/bin/ju
 install -m 0755 "$APP_DIR/scripts/juara_wifi_watchdog" /usr/local/bin/juara_wifi_watchdog
 cat > /etc/default/juara-gdrive-sync <<EOF
 JUARA_LOCAL_ROOT=/var/lib/juara-station/local
-JUARA_GDRIVE_REMOTE=$GDRIVE_REMOTE
-JUARA_GDRIVE_DIR=$GDRIVE_DIR
+JUARA_GDRIVE_REMOTE="$GDRIVE_REMOTE"
+JUARA_GDRIVE_DIR="$GDRIVE_DIR"
 JUARA_GDRIVE_LOG=/var/log/juara-gdrive-sync.log
 JUARA_GDRIVE_TRANSFERS=1
 JUARA_GDRIVE_CHECKERS=2

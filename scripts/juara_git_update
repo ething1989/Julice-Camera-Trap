@@ -155,6 +155,12 @@ if gdrive_env.exists():
     updated = re.sub(r"^JUARA_LOCAL_ROOT=.*$", "JUARA_LOCAL_ROOT=/var/lib/juara-station/local", original, flags=re.MULTILINE)
     if "JUARA_LOCAL_ROOT=" not in updated:
         updated += "\nJUARA_LOCAL_ROOT=/var/lib/juara-station/local\n"
+    updated = re.sub(
+        r"^JUARA_GDRIVE_DIR=([^\"'\n]*\s[^\"'\n]*)$",
+        lambda match: f'JUARA_GDRIVE_DIR="{match.group(1)}"',
+        updated,
+        flags=re.MULTILINE,
+    )
     if updated != original:
         gdrive_env.write_text(updated)
         print(f"updated {gdrive_env} local root")

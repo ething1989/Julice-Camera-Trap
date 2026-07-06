@@ -11,9 +11,27 @@ REMOTE_NAME="${JUARA_GDRIVE_REMOTE:-juara-gdrive}"
 REMOTE_DIR="${JUARA_GDRIVE_DIR:-Julice Camera Trap July 2026}"
 LOG_PATH="${JUARA_GDRIVE_LOG:-/var/log/juara-gdrive-sync.log}"
 LOCK_PATH="${JUARA_GDRIVE_LOCK:-/run/lock/juara-gdrive-sync.lock}"
+PREFLIGHT_TIMEOUT_SECONDS="${JUARA_GDRIVE_PREFLIGHT_TIMEOUT_SECONDS:-60}"
+COPY_TIMEOUT_SECONDS="${JUARA_GDRIVE_COPY_TIMEOUT_SECONDS:-900}"
 
 log() {
   printf '%s %s\n' "$(date -Is)" "$*" | tee -a "$LOG_PATH" >/dev/null
+}
+
+run_with_timeout() {
+  label="$1"
+  seconds="$2"
+  shift 2
+  if command -v timeout >/dev/null 2>&1; then
+    timeout --kill-after=30s "$seconds" "$@"
+  else
+    "$@"
+  fi
+  status=$?
+  if [ "$status" -eq 124 ] || [ "$status" -eq 137 ]; then
+    log "$label timed out after ${seconds}s"
+  fi
+  return "$status"
 }
 
 if ! command -v rclone >/dev/null 2>&1; then
@@ -31,11 +49,6 @@ if ! rclone listremotes 2>/dev/null | grep -qx "${REMOTE_NAME}:"; then
   exit 0
 fi
 
-if ! rclone about "${REMOTE_NAME}:" >/dev/null 2>&1; then
-  log "remote ${REMOTE_NAME}: is configured but not logged in yet"
-  exit 0
-fi
-
 mkdir -p "$(dirname "$LOCK_PATH")"
 exec 9>"$LOCK_PATH"
 if ! flock -n 9; then
@@ -43,8 +56,14 @@ if ! flock -n 9; then
   exit 0
 fi
 
+if ! run_with_timeout "remote preflight" "$PREFLIGHT_TIMEOUT_SECONDS" rclone about "${REMOTE_NAME}:" >/dev/null 2>&1; then
+  log "remote ${REMOTE_NAME}: is not reachable or not logged in yet"
+  exit 0
+fi
+
 log "starting CSV copy to ${REMOTE_NAME}:${REMOTE_DIR}"
-rclone copy "$LOCAL_ROOT" "${REMOTE_NAME}:${REMOTE_DIR}" \
+run_with_timeout "CSV sync" "$COPY_TIMEOUT_SECONDS" \
+  rclone copy "$LOCAL_ROOT" "${REMOTE_NAME}:${REMOTE_DIR}" \
   --fast-list \
   --transfers 2 \
   --checkers 4 \

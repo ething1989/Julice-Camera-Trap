@@ -113,6 +113,9 @@ class TimeConfig:
     coordinate_max_distance_from_fallback_km: float = 0.0
     fallback_latitude: float = -16.68260
     fallback_longitude: float = -56.90453
+    internet_coordinate_enabled: bool = True
+    internet_coordinate_timeout_seconds: float = 4.0
+    internet_coordinate_urls: list[str] = field(default_factory=list)
     species_pack_root: Path | None = None
     active_species_list_path: Path | None = None
 

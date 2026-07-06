@@ -1,0 +1,163 @@
+Passer domesticus_House Sparrow
+Chroicocephalus novaehollandiae_Silver Gull
+Larus dominicanus_Kelp Gull
+Acridotheres tristis_Common Myna
+Todiramphus sanctus_Sacred Kingfisher
+Hirundo neoxena_Welcome Swallow
+Circus approximans_Swamp Harrier
+Turdus merula_Eurasian Blackbird
+Rhipidura fuliginosa_New Zealand Fantail
+Zosterops lateralis_Silvereye
+Prosthemadera novaeseelandiae_Tui
+Egretta novaehollandiae_White-faced Heron
+Vanellus miles_Masked Lapwing
+Porphyrio melanotus_Australasian Swamphen
+Sterna striata_White-fronted Tern
+Anthus novaeseelandiae_Australasian Pipit
+Pycnonotus cafer_Red-vented Bulbul
+Haematopus unicolor_Variable Oystercatcher
+Callipepla californica_California Quail
+Pluvialis fulva_Pacific Golden-Plover
+Carduelis carduelis_European Goldfinch
+Alauda arvensis_Eurasian Skylark
+Phasianus colchicus_Ring-necked Pheasant
+Limosa lapponica_Bar-tailed Godwit
+Eudyptula minor_Little Penguin
+Tringa incana_Wandering Tattler
+Zapornia tabuensis_Spotless Crake
+Arenaria interpres_Ruddy Turnstone
+Gallirallus australis_Weka
+Anas superciliosa_Pacific Black Duck
+Gallirallus philippensis_Buff-banded Rail
+Egretta sacra_Pacific Reef-Heron
+Ardenna bulleri_Buller's Shearwater
+Tyto alba_Barn Owl
+Platycercus eximius_Eastern Rosella
+Pterodroma nigripennis_Black-winged Petrel
+Urodynamis taitensis_Long-tailed Koel
+Ardenna grisea_Sooty Shearwater
+Acridotheres fuscus_Jungle Myna
+Ardenna tenuirostris_Short-tailed Shearwater
+Phaethon lepturus_White-tailed Tropicbird
+Anous minutus_Black Noddy
+Anous stolidus_Brown Noddy
+Himantopus leucocephalus_Pied Stilt
+Cygnus atratus_Black Swan
+Falco peregrinus_Peregrine Falcon
+Chrysococcyx lucidus_Shining Bronze-Cuckoo
+Gygis alba_White Tern
+Anas platyrhynchos_Mallard
+Sturnus vulgaris_European Starling
+Pterodroma cookii_Cook's Petrel
+Turdus philomelos_Song Thrush
+Sula leucogaster_Brown Booby
+Sula dactylatra_Masked Booby
+Cyanoramphus novaezelandiae_Red-crowned Parakeet
+Foulehaio procerior_Western Wattled-Honeyeater
+Emberiza citrinella_Yellowhammer
+Calidris alba_Sanderling
+Lalage maculosa_Polynesian Triller
+Fregata minor_Great Frigatebird
+Numenius phaeopus_Whimbrel
+Sula sula_Red-footed Booby
+Ardenna pacifica_Wedge-tailed Shearwater
+Anas gracilis_Gray Teal
+Charadrius bicinctus_Double-banded Plover
+Calidris canutus_Red Knot
+Sterna sumatrana_Black-naped Tern
+Fringilla coelebs_Common Chaffinch
+Streptopelia chinensis_Spotted Dove
+Thalassarche melanophris_Black-browed Albatross
+Phalacrocorax carbo_Great Cormorant
+Fregata ariel_Lesser Frigatebird
+Diomedea exulans_Wandering Albatross
+Meleagris gallopavo_Wild Turkey
+Onychoprion fuscatus_Sooty Tern
+Gerygone igata_Gray Gerygone
+Columba vitiensis_Metallic Pigeon
+Tadorna variegata_Paradise Shelduck
+Onychoprion anaethetus_Bridled Tern
+Gymnorhina tibicen_Australian Magpie
+Philesturnus rufusater_North Island Saddleback
+Gallus gallus_Red Junglefowl
+Columba livia_Rock Pigeon
+Petroica macrocephala_Tomtit
+Pavo cristatus_Indian Peafowl
+Streptopelia roseogrisea_African Collared-Dove
+Prosopeia personata_Masked Shining-Parrot
+Ninox novaeseelandiae_Morepork
+Apteryx mantelli_North Island Brown Kiwi
+Tringa brevipes_Gray-tailed Tattler
+Puffinus bailloni_Tropical Shearwater
+Chloris chloris_European Greenfinch
+Gymnomyza brunneirostris_Duetting Giant-Honeyeater
+Ducula pacifica_Pacific Imperial-Pigeon
+Hydroprogne caspia_Caspian Tern
+Petroica pusilla_Pacific Robin
+Turdus poliocephalus_Island Thrush
+Myiagra vanikorensis_Vanikoro Flycatcher
+Hirundo tahitica_Pacific Swallow
+Calidris ruficollis_Red-necked Stint
+Daption capense_Cape Petrel
+Phaethon rubricauda_Red-tailed Tropicbird
+Stercorarius antarcticus_Brown Skua
+Prunella modularis_Dunnock
+Numenius tahitiensis_Bristle-thighed Curlew
+Poodytes punctatus_New Zealand Fernbird
+Numenius madagascariensis_Far Eastern Curlew
+Acanthis cabaret_Lesser Redpoll
+Horornis ruficapilla_Fiji Bush Warbler
+Estrilda astrild_Common Waxbill
+Sterna dougallii_Roseate Tern
+Pluvialis squatarola_Black-bellied Plover
+Onychoprion lunatus_Gray-backed Tern
+Anous ceruleus_Blue-gray Noddy
+Poliolimnas cinereus_White-browed Crake
+Lonchura castaneothorax_Chestnut-breasted Munia
+Calidris acuminata_Sharp-tailed Sandpiper
+Fulica atra_Eurasian Coot
+Ducula latrans_Peale's Imperial-Pigeon
+Rhipidura verreauxi_Streaked Fantail
+Sterna paradisaea_Arctic Tern
+Tachybaptus novaehollandiae_Australasian Grebe
+Aplonis tabuensis_Polynesian Starling
+Clytorhynchus vitiensis_Fiji Shrikebill
+Charadrius mongolus_Lesser Sand-Plover
+Cacomantis flabelliformis_Fan-tailed Cuckoo
+Esacus magnirostris_Beach Thick-knee
+Pachycephala rufiventris_Rufous Whistler
+Stercorarius pomarinus_Pomarine Jaeger
+Petroica longipes_North Island Robin
+Mohoua albicilla_Whitehead
+Elseyornis melanops_Black-fronted Dotterel
+Branta canadensis_Canada Goose
+Haematopus finschi_South Island Oystercatcher
+Pachycephala vitiensis_Fiji Whistler
+Chalcophaps longirostris_Pacific Emerald Dove
+Puffinus nativitatis_Christmas Shearwater
+Todiramphus sacer_Pacific Kingfisher
+Gallinula tenebrosa_Dusky Moorhen
+Bubulcus ibis_Cattle Egret
+Amandava amandava_Red Avadavat
+Thalasseus bergii_Great Crested Tern
+Accipiter fasciatus_Brown Goshawk
+Stercorarius parasiticus_Parasitic Jaeger
+Erythrura trichroa_Blue-faced Parrotfinch
+Periparus ater_Coal Tit
+Rhynochetos jubatus_Kagu
+Ptilinopus porphyraceus_Crimson-crowned Fruit-Dove
+Gymnomyza samoensis_Mao
+Haliastur sphenurus_Whistling Kite
+Pachycephala flavifrons_Samoan Whistler
+Pterodroma inexpectata_Mottled Petrel
+Callaeas wilsoni_North Island Kokako
+Calidris alpina_Dunlin
+Padda oryzivora_Java Sparrow
+Calidris pusilla_Semipalmated Sandpiper
+Oenanthe oenanthe_Northern Wheatear
+Nycticorax nycticorax_Black-crowned Night-Heron
+Myiagra caledonica_Melanesian Flycatcher
+Foulehaio carunculatus_Eastern Wattled-Honeyeater
+Aplonis atrifusca_Samoan Starling
+Pandion haliaetus_Osprey
+Artamus leucorynchus_White-breasted Woodswallow

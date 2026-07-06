@@ -7,10 +7,11 @@ import logging
 
 from .config import load_config
 from .csv_exporter import export_day_csv
+from .geolocation import DEFAULT_GEOLOCATION_URLS, read_internet_location
 from .paths import resolve_paths
 from .service import StationService
 from .species_pack import write_active_species_list
-from .storage import DataStore, utc_now
+from .storage import DataStore, to_utc_iso, utc_now
 
 
 def main() -> None:
@@ -48,6 +49,16 @@ def main() -> None:
     species = sub.add_parser("select-species", help="Build the active BirdNET species list from a species pack.")
     species.add_argument("--lat", type=float, default=None, help="Latitude; defaults to configured fallback latitude.")
     species.add_argument("--lon", type=float, default=None, help="Longitude; defaults to configured fallback longitude.")
+    species.add_argument(
+        "--internet-location",
+        action="store_true",
+        help="Use IP geolocation when latitude/longitude are not provided.",
+    )
+    species.add_argument(
+        "--write-coordinate-state",
+        action="store_true",
+        help="Persist the selected coordinates for the station service.",
+    )
     species.set_defaults(func=_select_species)
 
     args = parser.parse_args()
@@ -144,9 +155,38 @@ def _select_species(args) -> None:
         if config.birdnet.species_list_path is None:
             raise SystemExit("No active species list output path is configured")
         output_path = Path(config.birdnet.species_list_path)
-    latitude = args.lat if args.lat is not None else config.time.fallback_latitude
-    longitude = args.lon if args.lon is not None else config.time.fallback_longitude
+    latitude = args.lat
+    longitude = args.lon
+    coordinate_source = "cli"
+    if (latitude is None or longitude is None) and args.internet_location:
+        urls = config.time.internet_coordinate_urls or list(DEFAULT_GEOLOCATION_URLS)
+        location = read_internet_location(urls, timeout_seconds=config.time.internet_coordinate_timeout_seconds)
+        if location is not None:
+            latitude = location.latitude
+            longitude = location.longitude
+            coordinate_source = "internet"
+            label = f" ({location.label})" if location.label else ""
+            print(f"internet_location={location.source_url}{label}")
+    if latitude is None:
+        latitude = config.time.fallback_latitude
+        coordinate_source = "fallback"
+    if longitude is None:
+        longitude = config.time.fallback_longitude
+        coordinate_source = "fallback"
+    if args.write_coordinate_state or coordinate_source == "internet":
+        paths = resolve_paths(config.storage)
+        state_path = paths.state_dir / "active_coordinates.json"
+        state_path.parent.mkdir(parents=True, exist_ok=True)
+        state_path.write_text(
+            "{\n"
+            f'  "latitude": {float(latitude)},\n'
+            f'  "longitude": {float(longitude)},\n'
+            f'  "source": "{coordinate_source}",\n'
+            f'  "updated_at_utc": "{to_utc_iso(utc_now())}"\n'
+            "}\n"
+        )
     selection = write_active_species_list(pack_root, output_path, latitude, longitude)
+    print(f"coordinate_source={coordinate_source}")
     print(f"species_count={selection.species_count}")
     print("nearest_cell_count=" + str(len(selection.cell_files)))
     print("cells=" + ",".join(selection.cell_files))

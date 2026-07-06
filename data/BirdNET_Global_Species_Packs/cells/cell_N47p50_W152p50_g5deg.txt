@@ -1,0 +1,189 @@
+Larus glaucescens_Glaucous-winged Gull
+Haliaeetus leucocephalus_Bald Eagle
+Poecile atricapillus_Black-capped Chickadee
+Larus brachyrhynchus_Short-billed Gull
+Mergus serrator_Red-breasted Merganser
+Rissa tridactyla_Black-legged Kittiwake
+Anas platyrhynchos_Mallard
+Passerella iliaca_Fox Sparrow
+Passerculus sandwichensis_Savannah Sparrow
+Zonotrichia atricapilla_Golden-crowned Sparrow
+Anas crecca_Green-winged Teal
+Melospiza melodia_Song Sparrow
+Histrionicus histrionicus_Harlequin Duck
+Anser canagicus_Emperor Goose
+Bucephala albeola_Bufflehead
+Bucephala clangula_Common Goldeneye
+Corvus corax_Common Raven
+Aythya marila_Greater Scaup
+Cepphus columba_Pigeon Guillemot
+Megaceryle alcyon_Belted Kingfisher
+Mareca americana_American Wigeon
+Mergus merganser_Common Merganser
+Podiceps auritus_Horned Grebe
+Clangula hyemalis_Long-tailed Duck
+Catharus guttatus_Hermit Thrush
+Gavia immer_Common Loon
+Melanitta americana_Black Scoter
+Tringa melanoleuca_Greater Yellowlegs
+Anas acuta_Northern Pintail
+Cardellina pusilla_Wilson's Warbler
+Nannopterum auritum_Double-crested Cormorant
+Mareca strepera_Gadwall
+Podiceps grisegena_Red-necked Grebe
+Calidris minutilla_Least Sandpiper
+Junco hyemalis_Dark-eyed Junco
+Corvus brachyrhynchos_American Crow
+Charadrius semipalmatus_Semipalmated Plover
+Haematopus bachmani_Black Oystercatcher
+Acanthis flammea_Common Redpoll
+Anser albifrons_Greater White-fronted Goose
+Uria aalge_Common Murre
+Gallinago delicata_Wilson's Snipe
+Spinus pinus_Pine Siskin
+Bucephala islandica_Barrow's Goldeneye
+Onychoprion aleuticus_Aleutian Tern
+Arenaria melanocephala_Black Turnstone
+Spatula clypeata_Northern Shoveler
+Branta bernicla_Brant
+Regulus satrapa_Golden-crowned Kinglet
+Setophaga petechia_Yellow Warbler
+Melanitta perspicillata_Surf Scoter
+Larus argentatus_Herring Gull
+Fulmarus glacialis_Northern Fulmar
+Setophaga coronata_Yellow-rumped Warbler
+Ixoreus naevius_Varied Thrush
+Calidris mauri_Western Sandpiper
+Sterna paradisaea_Arctic Tern
+Tachycineta bicolor_Tree Swallow
+Dryobates pubescens_Downy Woodpecker
+Sitta canadensis_Red-breasted Nuthatch
+Branta hutchinsii_Cackling Goose
+Falco peregrinus_Peregrine Falcon
+Branta canadensis_Canada Goose
+Pluvialis fulva_Pacific Golden-Plover
+Troglodytes pacificus_Pacific Wren
+Leiothlypis celata_Orange-crowned Warbler
+Calidris alpina_Dunlin
+Calidris ptilocnemis_Rock Sandpiper
+Gavia pacifica_Pacific Loon
+Phalaropus lobatus_Red-necked Phalarope
+Ardenna grisea_Sooty Shearwater
+Pluvialis squatarola_Black-bellied Plover
+Limnodromus griseus_Short-billed Dowitcher
+Brachyramphus marmoratus_Marbled Murrelet
+Tringa incana_Wandering Tattler
+Corthylio calendula_Ruby-crowned Kinglet
+Ardenna tenuirostris_Short-tailed Shearwater
+Stercorarius pomarinus_Pomarine Jaeger
+Cygnus columbianus_Tundra Swan
+Somateria mollissima_Common Eider
+Turdus migratorius_American Robin
+Arenaria interpres_Ruddy Turnstone
+Phoebastria nigripes_Black-footed Albatross
+Lanius borealis_Northern Shrike
+Numenius phaeopus_Whimbrel
+Falco columbarius_Merlin
+Pinicola enucleator_Pine Grosbeak
+Plectrophenax nivalis_Snow Bunting
+Aythya collaris_Ring-necked Duck
+Calcarius lapponicus_Lapland Longspur
+Gavia stellata_Red-throated Loon
+Phoebastria immutabilis_Laysan Albatross
+Tringa flavipes_Lesser Yellowlegs
+Larus schistisagus_Slaty-backed Gull
+Aethia pusilla_Least Auklet
+Spizelloides arborea_American Tree Sparrow
+Calidris alba_Sanderling
+Aythya affinis_Lesser Scaup
+Anthus rubescens_American Pipit
+Riparia riparia_Bank Swallow
+Perisoreus canadensis_Canada Jay
+Stercorarius parasiticus_Parasitic Jaeger
+Xema sabini_Sabine's Gull
+Asio flammeus_Short-eared Owl
+Actitis macularius_Spotted Sandpiper
+Hydrobates leucorhous_Leach's Storm-Petrel
+Certhia americana_Brown Creeper
+Cygnus buccinator_Trumpeter Swan
+Melospiza lincolnii_Lincoln's Sparrow
+Stercorarius longicaudus_Long-tailed Jaeger
+Calidris virgata_Surfbird
+Limnodromus scolopaceus_Long-billed Dowitcher
+Leucosticte tephrocotis_Gray-crowned Rosy-Finch
+Antigone canadensis_Sandhill Crane
+Pica hudsonia_Black-billed Magpie
+Tachycineta thalassina_Violet-green Swallow
+Cinclus mexicanus_American Dipper
+Gavia adamsii_Yellow-billed Loon
+Zonotrichia leucophrys_White-crowned Sparrow
+Calidris melanotos_Pectoral Sandpiper
+Accipiter gentilis_Northern Goshawk
+Circus hudsonius_Northern Harrier
+Chroicocephalus philadelphia_Bonaparte's Gull
+Catharus ustulatus_Swainson's Thrush
+Uria lomvia_Thick-billed Murre
+Limosa lapponica_Bar-tailed Godwit
+Calidris pusilla_Semipalmated Sandpiper
+Somateria spectabilis_King Eider
+Loxia curvirostra_Red Crossbill
+Lagopus lagopus_Willow Ptarmigan
+Accipiter striatus_Sharp-shinned Hawk
+Falco rusticolus_Gyrfalcon
+Calidris bairdii_Baird's Sandpiper
+Aythya valisineria_Canvasback
+Poecile hudsonicus_Boreal Chickadee
+Limosa fedoa_Marbled Godwit
+Lagopus muta_Rock Ptarmigan
+Pandion haliaetus_Osprey
+Larus hyperboreus_Glaucous Gull
+Petrochelidon pyrrhonota_Cliff Swallow
+Canachites canadensis_Spruce Grouse
+Mareca penelope_Eurasian Wigeon
+Buteo jamaicensis_Red-tailed Hawk
+Empidonax alnorum_Alder Flycatcher
+Pluvialis dominica_American Golden-Plover
+Numenius tahitiensis_Bristle-thighed Curlew
+Acanthis hornemanni_Hoary Redpoll
+Loxia leucoptera_White-winged Crossbill
+Catharus minimus_Gray-cheeked Thrush
+Picoides dorsalis_American Three-toed Woodpecker
+Bubo virginianus_Great Horned Owl
+Aquila chrysaetos_Golden Eagle
+Buteo lagopus_Rough-legged Hawk
+Motacilla tschutschensis_Eastern Yellow Wagtail
+Bombycilla garrulus_Bohemian Waxwing
+Spatula discors_Blue-winged Teal
+Hydroprogne caspia_Caspian Tern
+Phalaropus fulicarius_Red Phalarope
+Parkesia noveboracensis_Northern Waterthrush
+Tringa solitaria_Solitary Sandpiper
+Surnia ulula_Northern Hawk Owl
+Limosa haemastica_Hudsonian Godwit
+Eremophila alpestris_Horned Lark
+Euphagus carolinus_Rusty Blackbird
+Aegolius funereus_Boreal Owl
+Aythya americana_Redhead
+Setophaga striata_Blackpoll Warbler
+Dryobates villosus_Hairy Woodpecker
+Anser caerulescens_Snow Goose
+Aythya fuligula_Tufted Duck
+Sayornis saya_Say's Phoebe
+Calidris acuminata_Sharp-tailed Sandpiper
+Larus glaucoides_Iceland Gull
+Columba livia_Rock Pigeon
+Ardea herodias_Great Blue Heron
+Bubo scandiacus_Snowy Owl
+Contopus cooperi_Olive-sided Flycatcher
+Passer domesticus_House Sparrow
+Haemorhous mexicanus_House Finch
+Pterodroma inexpectata_Mottled Petrel
+Ardenna bulleri_Buller's Shearwater
+Motacilla alba_White Wagtail
+Lophodytes cucullatus_Hooded Merganser
+Calidris canutus_Red Knot
+Aegolius acadicus_Northern Saw-whet Owl
+Bonasa umbellus_Ruffed Grouse
+Phylloscopus borealis_Arctic Warbler
+Aethia pygmaea_Whiskered Auklet
+Charadrius vociferus_Killdeer

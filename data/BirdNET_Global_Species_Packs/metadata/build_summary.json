@@ -1,0 +1,16 @@
+{
+  "generated_utc": "2026-05-30T20:49:52+00:00",
+  "output_dir": "/Users/ericsmaby/Desktop/BirdNET_Global_Species_Packs",
+  "grid_deg": 5.0,
+  "week": -1,
+  "threshold": 0.03,
+  "total_cell_centers_possible": 2592,
+  "total_cells_processed": 2592,
+  "world_unique_species_count": 6301,
+  "regions_count": 24,
+  "duration_seconds": 9.16,
+  "cleanup_utc": "2026-06-11T00:15:34Z",
+  "nonbird_cleanup_backup": "/Users/ericsmaby/Desktop/BirdNET_Global_Species_Packs_backup_before_nonbird_cleanup_20260610_201532",
+  "obvious_nonbird_labels_removed_unique": 0,
+  "obvious_nonbird_label_occurrences_removed": 0
+}

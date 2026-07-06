@@ -1,0 +1,25 @@
+key,title,description,lat_min,lat_max,lon_min,lon_max,bbox_wraps_dateline,cell_count,species_count,species_file,counts_file
+world,World,Global union of all cells.,-90,90,-180,180,False,2592,6301,regions/world.txt,regions/world_counts.tsv
+mamiraua_core,Mamiraua Core,Mamiraua and nearby central Amazon area.,-4.5,-1.0,-67.5,-63.0,False,1,872,regions/mamiraua_core.txt,regions/mamiraua_core_counts.tsv
+amazon_rainforest,Amazon Rainforest,Broad Amazon basin envelope.,-20,9,-82,-45,False,42,2370,regions/amazon_rainforest.txt,regions/amazon_rainforest_counts.tsv
+north_america,North America,North American landmass envelope.,7,84,-171,-50,False,384,2459,regions/north_america.txt,regions/north_america_counts.tsv
+central_america_caribbean,Central America and Caribbean,Central America + Caribbean islands envelope.,5,28,-98,-58,False,40,2101,regions/central_america_caribbean.txt,regions/central_america_caribbean_counts.tsv
+south_america,South America,South American landmass envelope.,-57,13,-82,-34,False,126,2708,regions/south_america.txt,regions/south_america_counts.tsv
+europe,Europe,European envelope including western islands.,35,72,-25,45,False,98,574,regions/europe.txt,regions/europe_counts.tsv
+north_africa,North Africa,Northern Africa (Sahara + Mediterranean belt).,15,38,-18,40,False,60,764,regions/north_africa.txt,regions/north_africa_counts.tsv
+sub_saharan_africa,Sub-Saharan Africa,Sub-Saharan African envelope.,-35,16,-20,52,False,140,1828,regions/sub_saharan_africa.txt,regions/sub_saharan_africa_counts.tsv
+middle_east,Middle East,Arabian Peninsula + Levant + nearby.,10,42,32,64,False,42,1144,regions/middle_east.txt,regions/middle_east_counts.tsv
+central_asia,Central Asia,Central Asian steppe and mountain belt.,35,56,45,90,False,36,960,regions/central_asia.txt,regions/central_asia_counts.tsv
+south_asia,South Asia,Indian subcontinent envelope.,5,36,66,92,False,30,1023,regions/south_asia.txt,regions/south_asia_counts.tsv
+southeast_asia,Southeast Asia,Mainland + maritime Southeast Asia.,-12,24,92,141,False,70,1724,regions/southeast_asia.txt,regions/southeast_asia_counts.tsv
+east_asia,East Asia,East Asia envelope.,18,55,102,150,False,70,1358,regions/east_asia.txt,regions/east_asia_counts.tsv
+australia_new_guinea,Australia and New Guinea,Australia + Tasmania + New Guinea envelope.,-49,-1,110,170,False,120,1178,regions/australia_new_guinea.txt,regions/australia_new_guinea_counts.tsv
+oceania_pacific,Oceania Pacific Islands,Pacific islands (dateline-wrapping bbox).,-35,30,150,-110,True,260,1500,regions/oceania_pacific.txt,regions/oceania_pacific_counts.tsv
+arctic,Arctic,High Arctic zone.,66,90,-180,180,False,360,761,regions/arctic.txt,regions/arctic_counts.tsv
+antarctica,Antarctica,Antarctic zone.,-90,-60,-180,180,False,432,61,regions/antarctica.txt,regions/antarctica_counts.tsv
+nearctic_realm,Nearctic Realm (Approx),Approximate zoogeographic nearctic envelope.,14,84,-171,-50,False,336,1420,regions/nearctic_realm.txt,regions/nearctic_realm_counts.tsv
+neotropical_realm,Neotropical Realm (Approx),Approximate neotropical envelope.,-57,33,-118,-34,False,306,3345,regions/neotropical_realm.txt,regions/neotropical_realm_counts.tsv
+palearctic_realm,Palearctic Realm (Approx),Approximate palearctic envelope.,20,84,-25,180,False,533,1864,regions/palearctic_realm.txt,regions/palearctic_realm_counts.tsv
+afrotropical_realm,Afrotropical Realm (Approx),Approximate afrotropical envelope.,-35,24,-20,55,False,180,1960,regions/afrotropical_realm.txt,regions/afrotropical_realm_counts.tsv
+indo_malayan_realm,Indo-Malayan Realm (Approx),Approximate Indo-Malayan envelope.,-12,35,65,150,False,153,1991,regions/indo_malayan_realm.txt,regions/indo_malayan_realm_counts.tsv
+australasian_realm,Australasian Realm (Approx),Approximate Australasian envelope.,-50,0,110,180,False,140,1201,regions/australasian_realm.txt,regions/australasian_realm_counts.tsv

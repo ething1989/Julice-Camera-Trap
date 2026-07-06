@@ -82,7 +82,7 @@ coordinate_min_consistent_fraction = 0.8
 coordinate_max_distance_from_fallback_km = 0.0
 fallback_latitude = -16.68260
 fallback_longitude = -56.90453
-species_pack_root = "/opt/juara-wildlife-station/data/BirdNET_100mi_PrimaryPlus"
+species_pack_root = "/opt/juara-wildlife-station/data/BirdNET_Global_Species_Packs"
 active_species_list_path = "/var/lib/juara-station/state/juara-birdnet-species-list.txt"
 
 [birdnet]

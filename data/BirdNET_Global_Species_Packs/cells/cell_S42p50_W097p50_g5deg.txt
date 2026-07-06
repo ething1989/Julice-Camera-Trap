@@ -1,0 +1,173 @@
+Coragyps atratus_Black Vulture
+Cathartes aura_Turkey Vulture
+Larus dominicanus_Kelp Gull
+Chroicocephalus maculipennis_Brown-hooded Gull
+Turdus falcklandii_Austral Thrush
+Tachycineta leucopyga_Chilean Swallow
+Theristicus melanopis_Black-faced Ibis
+Vanellus chilensis_Southern Lapwing
+Nannopterum brasilianum_Neotropic Cormorant
+Milvago chimango_Chimango Caracara
+Thalassarche melanophris_Black-browed Albatross
+Elaenia albiceps_White-crested Elaenia
+Sephanoides sephaniodes_Green-backed Firecrown
+Cistothorus platensis_Grass Wren
+Phrygilus patagonicus_Patagonian Sierra Finch
+Scelorchilus rubecula_Chucao Tapaculo
+Megaceryle torquata_Ringed Kingfisher
+Cygnus melancoryphus_Black-necked Swan
+Anthus hellmayri_Hellmayr's Pipit
+Troglodytes aedon_House Wren
+Anthus correndera_Correndera Pipit
+Scytalopus magellanicus_Magellanic Tapaculo
+Spheniscus magellanicus_Magellanic Penguin
+Ardenna creatopus_Pink-footed Shearwater
+Cinclodes patagonicus_Dark-bellied Cinclodes
+Charadrius falklandicus_Two-banded Plover
+Anas flavirostris_Yellow-billed Teal
+Pardirallus sanguinolentus_Plumbeous Rail
+Diomedea exulans_Wandering Albatross
+Molothrus bonariensis_Shiny Cowbird
+Spinus barbatus_Black-chinned Siskin
+Sterna hirundinacea_South American Tern
+Sicalis luteola_Grassland Yellow-Finch
+Podiceps occipitalis_Silvery Grebe
+Falco femoralis_Aplomado Falcon
+Colorhamphus parvirostris_Patagonian Tyrant
+Geositta rufipennis_Rufous-banded Miner
+Daption capense_Cape Petrel
+Melanodera xanthogramma_Yellow-bridled Finch
+Hymenops perspicillatus_Spectacled Tyrant
+Systellura longirostris_Band-winged Nightjar
+Mareca sibilatrix_Chiloe Wigeon
+Geositta cunicularia_Common Miner
+Pygochelidon cyanoleuca_Blue-and-white Swallow
+Asthenes pyrrholeuca_Sharp-billed Canastero
+Ardea cocoi_Cocoi Heron
+Nycticorax nycticorax_Black-crowned Night-Heron
+Fulica rufifrons_Red-fronted Coot
+Numenius phaeopus_Whimbrel
+Geranoaetus polyosoma_Variable Hawk
+Tachuris rubrigastra_Many-colored Rush Tyrant
+Tyto alba_Barn Owl
+Agriornis montanus_Black-billed Shrike-Tyrant
+Accipiter bicolor_Bicolored Hawk
+Pyrope pyrope_Fire-eyed Diucon
+Asio flammeus_Short-eared Owl
+Leucophaeus scoresbii_Dolphin Gull
+Podiceps major_Great Grebe
+Eudromia elegans_Elegant Crested-Tinamou
+Asthenes modesta_Cordilleran Canastero
+Spatula platalea_Red Shoveler
+Campephilus magellanicus_Magellanic Woodpecker
+Geranoaetus melanoleucus_Black-chested Buzzard-Eagle
+Charadrius modestus_Rufous-chested Dotterel
+Metriopelia melanoptera_Black-winged Ground Dove
+Diuca diuca_Diuca Finch
+Ardenna grisea_Sooty Shearwater
+Anairetes parulus_Tufted Tit-Tyrant
+Curaeus curaeus_Austral Blackbird
+Phleocryptes melanops_Wren-like Rushbird
+Thinocorus rumicivorus_Least Seedsnipe
+Coscoroba coscoroba_Coscoroba Swan
+Tringa melanoleuca_Greater Yellowlegs
+Pterodroma externa_Juan Fernandez Petrel
+Anas georgica_Yellow-billed Pintail
+Limosa haemastica_Hudsonian Godwit
+Strix rufipes_Rufous-legged Owl
+Dryobates lignarius_Striped Woodpecker
+Ardea alba_Great Egret
+Calidris canutus_Red Knot
+Pteroptochos tarnii_Black-throated Huet-huet
+Agelasticus thilius_Yellow-winged Blackbird
+Enicognathus ferrugineus_Austral Parakeet
+Glaucidium nana_Austral Pygmy-Owl
+Egretta thula_Snowy Egret
+Mimus patagonicus_Patagonian Mockingbird
+Leptasthenura aegithaloides_Plain-mantled Tit-Spinetail
+Tringa flavipes_Lesser Yellowlegs
+Muscisaxicola maculirostris_Spot-billed Ground-Tyrant
+Phytotoma rara_Rufous-tailed Plantcutter
+Bubulcus ibis_Cattle Egret
+Phasianus colchicus_Ring-necked Pheasant
+Haematopus leucopodus_Magellanic Oystercatcher
+Passer domesticus_House Sparrow
+Attagis gayi_Rufous-bellied Seedsnipe
+Caracara plancus_Crested Caracara
+Pygarrhichas albogularis_White-throated Treerunner
+Cinclodes oustaleti_Gray-flanked Cinclodes
+Zenaida auriculata_Eared Dove
+Sylviorthorhynchus desmursii_Des Murs's Wiretail
+Phrygilus gayi_Gray-hooded Sierra Finch
+Oxyura ferruginea_Andean Duck
+Phoenicopterus chilensis_Chilean Flamingo
+Leistes loyca_Long-tailed Meadowlark
+Asthenes anthoides_Austral Canastero
+Hirundo rustica_Barn Swallow
+Haematopus ater_Blackish Oystercatcher
+Colaptes pitius_Chilean Flicker
+Spatula cyanoptera_Cinnamon Teal
+Patagioenas araucana_Chilean Pigeon
+Falco peregrinus_Peregrine Falcon
+Gallinago magellanica_Magellanic Snipe
+Bubo virginianus_Great Horned Owl
+Cinclodes fuscus_Buff-winged Cinclodes
+Muscisaxicola albilora_White-browed Ground-Tyrant
+Tachyeres patachonicus_Flying Steamer-Duck
+Zonotrichia capensis_Rufous-collared Sparrow
+Fulica armillata_Red-gartered Coot
+Lophonetta specularioides_Crested Duck
+Phalaropus tricolor_Wilson's Phalarope
+Stercorarius parasiticus_Parasitic Jaeger
+Aphrastura spinicauda_Thorn-tailed Rayadito
+Falco sparverius_American Kestrel
+Upucerthia dumetaria_Scale-throated Earthcreeper
+Buteo albigula_White-throated Hawk
+Chloephaga picta_Upland Goose
+Leucophaeus pipixcan_Franklin's Gull
+Calidris bairdii_Baird's Sandpiper
+Callipepla californica_California Quail
+Calidris virgata_Surfbird
+Phalaropus fulicarius_Red Phalarope
+Calidris fuscicollis_White-rumped Sandpiper
+Calidris alba_Sanderling
+Arenaria interpres_Ruddy Turnstone
+Sterna paradisaea_Arctic Tern
+Podilymbus podiceps_Pied-billed Grebe
+Pluvialis squatarola_Black-bellied Plover
+Plegadis chihi_White-faced Ibis
+Enicognathus leptorhynchus_Slender-billed Parakeet
+Haematopus palliatus_American Oystercatcher
+Athene cunicularia_Burrowing Owl
+Rynchops niger_Black Skimmer
+Myiopsitta monachus_Monk Parakeet
+Himantopus mexicanus_Black-necked Stilt
+Elanus leucurus_White-tailed Kite
+Geospizopsis unicolor_Plumbeous Sierra Finch
+Thinocorus orbignyianus_Gray-breasted Seedsnipe
+Thalasseus elegans_Elegant Tern
+Rhopospina fruticeti_Mourning Sierra Finch
+Parabuteo unicinctus_Harris's Hawk
+Charadrius nivosus_Snowy Plover
+Eugralla paradoxa_Ochre-flanked Tapaculo
+Xema sabini_Sabine's Gull
+Chroicocephalus serranus_Andean Gull
+Nothoprocta perdicaria_Chilean Tinamou
+Sterna trudeaui_Snowy-crowned Tern
+Ixobrychus involucris_Stripe-backed Bittern
+Charadrius collaris_Collared Plover
+Sicalis auriventris_Greater Yellow-Finch
+Larosterna inca_Inca Tern
+Upucerthia saturatior_Patagonian Forest Earthcreeper
+Porphyriops melanops_Spot-flanked Gallinule
+Laterallus jamaicensis_Black Rail
+Leucophaeus modestus_Gray Gull
+Rhopospina alaudina_Band-tailed Sierra Finch
+Cinclodes nigrofumosus_Seaside Cinclodes
+Pseudasthenes humicola_Dusky-tailed Canastero
+Oreopholus ruficollis_Tawny-throated Dotterel
+Calidris melanotos_Pectoral Sandpiper
+Columbina picui_Picui Ground Dove
+Columba livia_Rock Pigeon
+Ardenna bulleri_Buller's Shearwater
+Mimus thenca_Chilean Mockingbird

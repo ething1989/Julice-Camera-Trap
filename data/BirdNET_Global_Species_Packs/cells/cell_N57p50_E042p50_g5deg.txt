@@ -1,0 +1,368 @@
+Corvus cornix_Hooded Crow
+Parus major_Great Tit
+Motacilla alba_White Wagtail
+Fringilla coelebs_Common Chaffinch
+Cyanistes caeruleus_Eurasian Blue Tit
+Turdus pilaris_Fieldfare
+Turdus merula_Eurasian Blackbird
+Anas platyrhynchos_Mallard
+Corvus monedula_Eurasian Jackdaw
+Erithacus rubecula_European Robin
+Garrulus glandarius_Eurasian Jay
+Passer montanus_Eurasian Tree Sparrow
+Carduelis carduelis_European Goldfinch
+Chroicocephalus ridibundus_Black-headed Gull
+Corvus corax_Common Raven
+Larus canus_Common Gull
+Chloris chloris_European Greenfinch
+Columba livia_Rock Pigeon
+Dendrocopos major_Great Spotted Woodpecker
+Larus argentatus_Herring Gull
+Apus apus_Common Swift
+Fulica atra_Eurasian Coot
+Podiceps cristatus_Great Crested Grebe
+Troglodytes troglodytes_Eurasian Wren
+Turdus philomelos_Song Thrush
+Sturnus vulgaris_European Starling
+Anthus pratensis_Meadow Pipit
+Spinus spinus_Eurasian Siskin
+Passer domesticus_House Sparrow
+Milvus migrans_Black Kite
+Sitta europaea_Eurasian Nuthatch
+Pica pica_Eurasian Magpie
+Poecile montanus_Willow Tit
+Ardea cinerea_Gray Heron
+Phylloscopus collybita_Common Chiffchaff
+Bucephala clangula_Common Goldeneye
+Phylloscopus trochilus_Willow Warbler
+Aegithalos caudatus_Long-tailed Tit
+Emberiza citrinella_Yellowhammer
+Emberiza schoeniclus_Reed Bunting
+Regulus regulus_Goldcrest
+Aythya fuligula_Tufted Duck
+Accipiter nisus_Eurasian Sparrowhawk
+Alauda arvensis_Eurasian Skylark
+Pyrrhula pyrrhula_Eurasian Bullfinch
+Bombycilla garrulus_Bohemian Waxwing
+Nucifraga caryocatactes_Eurasian Nutcracker
+Periparus ater_Coal Tit
+Turdus iliacus_Redwing
+Tringa totanus_Common Redshank
+Linaria cannabina_Eurasian Linnet
+Corvus frugilegus_Rook
+Dryocopus martius_Black Woodpecker
+Sylvia atricapilla_Eurasian Blackcap
+Columba palumbus_Common Wood-Pigeon
+Fringilla montifringilla_Brambling
+Streptopelia turtur_European Turtle-Dove
+Falco tinnunculus_Eurasian Kestrel
+Aythya ferina_Common Pochard
+Turdus viscivorus_Mistle Thrush
+Buteo lagopus_Rough-legged Hawk
+Anas crecca_Green-winged Teal
+Spatula clypeata_Northern Shoveler
+Circus cyaneus_Hen Harrier
+Dryobates minor_Lesser Spotted Woodpecker
+Tringa ochropus_Green Sandpiper
+Motacilla citreola_Citrine Wagtail
+Acrocephalus dumetorum_Blyth's Reed Warbler
+Anser albifrons_Greater White-fronted Goose
+Vanellus vanellus_Northern Lapwing
+Anthus trivialis_Tree Pipit
+Gallinago gallinago_Common Snipe
+Mareca penelope_Eurasian Wigeon
+Lanius excubitor_Great Gray Shrike
+Anas acuta_Northern Pintail
+Accipiter gentilis_Northern Goshawk
+Muscicapa striata_Spotted Flycatcher
+Lagopus lagopus_Willow Ptarmigan
+Charadrius dubius_Little Ringed Plover
+Hirundo rustica_Barn Swallow
+Tringa glareola_Wood Sandpiper
+Luscinia svecica_Bluethroat
+Tetrastes bonasia_Hazel Grouse
+Mergus merganser_Common Merganser
+Falco columbarius_Merlin
+Sterna hirundo_Common Tern
+Oenanthe oenanthe_Northern Wheatear
+Asio otus_Long-eared Owl
+Curruca communis_Greater Whitethroat
+Loxia curvirostra_Red Crossbill
+Delichon urbicum_Common House-Martin
+Buteo buteo_Common Buzzard
+Actitis hypoleucos_Common Sandpiper
+Asio flammeus_Short-eared Owl
+Phylloscopus trochiloides_Greenish Warbler
+Carpodacus erythrinus_Common Rosefinch
+Phoenicurus phoenicurus_Common Redstart
+Circaetus gallicus_Short-toed Snake-Eagle
+Ficedula parva_Red-breasted Flycatcher
+Pluvialis apricaria_European Golden-Plover
+Plectrophenax nivalis_Snow Bunting
+Prunella modularis_Dunnock
+Mergus serrator_Red-breasted Merganser
+Cuculus canorus_Common Cuckoo
+Riparia riparia_Bank Swallow
+Falco subbuteo_Eurasian Hobby
+Haliaeetus albicilla_White-tailed Eagle
+Tringa nebularia_Common Greenshank
+Anser fabalis_Taiga Bean-Goose
+Sternula albifrons_Little Tern
+Poecile palustris_Marsh Tit
+Circus aeruginosus_Eurasian Marsh-Harrier
+Motacilla flava_Western Yellow Wagtail
+Lanius collurio_Red-backed Shrike
+Limosa limosa_Black-tailed Godwit
+Calidris pugnax_Ruff
+Haematopus ostralegus_Eurasian Oystercatcher
+Acrocephalus schoenobaenus_Sedge Warbler
+Cygnus cygnus_Whooper Swan
+Ficedula hypoleuca_European Pied Flycatcher
+Botaurus stellaris_Great Bittern
+Scolopax rusticola_Eurasian Woodcock
+Pernis apivorus_European Honey-buzzard
+Pandion haliaetus_Osprey
+Luscinia luscinia_Thrush Nightingale
+Sylvia borin_Garden Warbler
+Crex crex_Corn Crake
+Chlidonias niger_Black Tern
+Jynx torquilla_Eurasian Wryneck
+Numenius arquata_Eurasian Curlew
+Falco peregrinus_Peregrine Falcon
+Lyrurus tetrix_Black Grouse
+Saxicola rubetra_Whinchat
+Curruca curruca_Lesser Whitethroat
+Certhia familiaris_Eurasian Treecreeper
+Streptopelia decaocto_Eurasian Collared-Dove
+Mareca strepera_Gadwall
+Locustella fluviatilis_River Warbler
+Phylloscopus sibilatrix_Wood Warbler
+Iduna caligata_Booted Warbler
+Oriolus oriolus_Eurasian Golden Oriole
+Gallinula chloropus_Eurasian Moorhen
+Grus grus_Common Crane
+Ardea alba_Great Egret
+Tetrao urogallus_Western Capercaillie
+Eremophila alpestris_Horned Lark
+Podiceps auritus_Horned Grebe
+Hydrocoloeus minutus_Little Gull
+Larus fuscus_Lesser Black-backed Gull
+Clanga clanga_Greater Spotted Eagle
+Picus canus_Gray-headed Woodpecker
+Acanthis flammea_Common Redpoll
+Hippolais icterina_Icterine Warbler
+Phoenicurus ochruros_Black Redstart
+Coccothraustes coccothraustes_Hawfinch
+Clanga pomarina_Lesser Spotted Eagle
+Picus viridis_Eurasian Green Woodpecker
+Athene noctua_Little Owl
+Locustella naevia_Common Grasshopper-Warbler
+Calcarius lapponicus_Lapland Longspur
+Perdix perdix_Gray Partridge
+Anthus cervinus_Red-throated Pipit
+Upupa epops_Eurasian Hoopoe
+Strix nebulosa_Great Gray Owl
+Chlidonias hybrida_Whiskered Tern
+Numenius phaeopus_Whimbrel
+Calidris alpina_Dunlin
+Calidris temminckii_Temminck's Stint
+Gallinago media_Great Snipe
+Pinicola enucleator_Pine Grosbeak
+Rallus aquaticus_Water Rail
+Spatula querquedula_Garganey
+Dendrocopos leucotos_White-backed Woodpecker
+Lullula arborea_Wood Lark
+Lophophanes cristatus_Crested Tit
+Lymnocryptes minimus_Jack Snipe
+Podiceps grisegena_Red-necked Grebe
+Strix uralensis_Ural Owl
+Surnia ulula_Northern Hawk Owl
+Clangula hyemalis_Long-tailed Duck
+Alcedo atthis_Common Kingfisher
+Acrocephalus palustris_Marsh Warbler
+Mergellus albellus_Smew
+Circus macrourus_Pallid Harrier
+Coracias garrulus_European Roller
+Ciconia nigra_Black Stork
+Aythya marila_Greater Scaup
+Gavia stellata_Red-throated Loon
+Charadrius hiaticula_Common Ringed Plover
+Merops apiaster_European Bee-eater
+Aegolius funereus_Boreal Owl
+Bubo bubo_Eurasian Eagle-Owl
+Phalaropus lobatus_Red-necked Phalarope
+Columba oenas_Stock Dove
+Acrocephalus arundinaceus_Great Reed Warbler
+Acanthis hornemanni_Hoary Redpoll
+Ixobrychus minutus_Little Bittern
+Curruca nisoria_Barred Warbler
+Melanitta nigra_Common Scoter
+Podiceps nigricollis_Eared Grebe
+Circus pygargus_Montagu's Harrier
+Cygnus olor_Mute Swan
+Strix aluco_Tawny Owl
+Gavia arctica_Arctic Loon
+Tadorna ferruginea_Ruddy Shelduck
+Remiz pendulinus_Eurasian Penduline-Tit
+Aquila chrysaetos_Golden Eagle
+Emberiza rustica_Rustic Bunting
+Calidris minuta_Little Stint
+Tringa erythropus_Spotted Redshank
+Glaucidium passerinum_Eurasian Pygmy-Owl
+Tachybaptus ruficollis_Little Grebe
+Pluvialis squatarola_Black-bellied Plover
+Emberiza hortulana_Ortolan Bunting
+Tringa stagnatilis_Marsh Sandpiper
+Caprimulgus europaeus_Eurasian Nightjar
+Coturnix coturnix_Common Quail
+Porzana porzana_Spotted Crake
+Falco vespertinus_Red-footed Falcon
+Chlidonias leucopterus_White-winged Tern
+Acrocephalus scirpaceus_Eurasian Reed Warbler
+Picoides tridactylus_Eurasian Three-toed Woodpecker
+Hieraaetus pennatus_Booted Eagle
+Calidris ferruginea_Curlew Sandpiper
+Zapornia parva_Little Crake
+Cyanistes cyanus_Azure Tit
+Melanitta fusca_Velvet Scoter
+Calidris canutus_Red Knot
+Phalaropus fulicarius_Red Phalarope
+Charadrius morinellus_Eurasian Dotterel
+Cettia cetti_Cetti's Warbler
+Anser erythropus_Lesser White-fronted Goose
+Calidris alba_Sanderling
+Limosa lapponica_Bar-tailed Godwit
+Zapornia pusilla_Baillon's Crake
+Xenus cinereus_Terek Sandpiper
+Calidris falcinellus_Broad-billed Sandpiper
+Ficedula albicollis_Collared Flycatcher
+Arenaria interpres_Ruddy Turnstone
+Bubo scandiacus_Snowy Owl
+Ciconia ciconia_White Stork
+Loxia leucoptera_White-winged Crossbill
+Dendrocoptes medius_Middle Spotted Woodpecker
+Perisoreus infaustus_Siberian Jay
+Emberiza pusilla_Little Bunting
+Larus marinus_Great Black-backed Gull
+Phalacrocorax carbo_Great Cormorant
+Tetrax tetrax_Little Bustard
+Cinclus cinclus_White-throated Dipper
+Tadorna tadorna_Common Shelduck
+Panurus biarmicus_Bearded Reedling
+Acrocephalus agricola_Paddyfield Warbler
+Phylloscopus borealis_Arctic Warbler
+Locustella luscinioides_Savi's Warbler
+Falco rusticolus_Gyrfalcon
+Larus hyperboreus_Glaucous Gull
+Acrocephalus paludicola_Aquatic Warbler
+Galerida cristata_Crested Lark
+Phylloscopus inornatus_Yellow-browed Warbler
+Anser serrirostris_Tundra Bean-Goose
+Anthus campestris_Tawny Pipit
+Charadrius alexandrinus_Kentish Plover
+Poecile cinctus_Gray-headed Chickadee
+Anser anser_Graylag Goose
+Gyps fulvus_Eurasian Griffon
+Cygnus columbianus_Tundra Swan
+Aquila nipalensis_Steppe Eagle
+Merops persicus_Blue-cheeked Bee-eater
+Passer hispaniolensis_Spanish Sparrow
+Iduna pallida_Eastern Olivaceous Warbler
+Apus melba_Alpine Swift
+Gavia immer_Common Loon
+Netta rufina_Red-crested Pochard
+Stercorarius pomarinus_Pomarine Jaeger
+Linaria flavirostris_Twite
+Pyrrhocorax graculus_Yellow-billed Chough
+Stercorarius longicaudus_Long-tailed Jaeger
+Fulmarus glacialis_Northern Fulmar
+Motacilla cinerea_Gray Wagtail
+Uria aalge_Common Murre
+Fratercula arctica_Atlantic Puffin
+Alectoris chukar_Chukar
+Pastor roseus_Rosy Starling
+Prunella collaris_Alpine Accentor
+Rissa tridactyla_Black-legged Kittiwake
+Emberiza melanocephala_Black-headed Bunting
+Cercotrichas galactotes_Rufous-tailed Scrub-Robin
+Alca torda_Razorbill
+Oenanthe isabellina_Isabelline Wheatear
+Iduna rama_Sykes's Warbler
+Acrocephalus melanopogon_Moustached Warbler
+Pterocles orientalis_Black-bellied Sandgrouse
+Emberiza calandra_Corn Bunting
+Plegadis falcinellus_Glossy Ibis
+Ichthyaetus melanocephalus_Mediterranean Gull
+Stercorarius skua_Great Skua
+Thalasseus sandvicensis_Sandwich Tern
+Calidris maritima_Purple Sandpiper
+Nycticorax nycticorax_Black-crowned Night-Heron
+Glareola pratincola_Collared Pratincole
+Pyrrhocorax pyrrhocorax_Red-billed Chough
+Egretta garzetta_Little Egret
+Ptyonoprogne rupestris_Eurasian Crag-Martin
+Emberiza cia_Rock Bunting
+Lanius minor_Lesser Gray Shrike
+Otus scops_Eurasian Scops-Owl
+Milvus milvus_Red Kite
+Sitta krueperi_Krüper's Nuthatch
+Melanocorypha calandra_Calandra Lark
+Stercorarius parasiticus_Parasitic Jaeger
+Oenanthe pleschanka_Pied Wheatear
+Carpodacus rubicilla_Great Rosefinch
+Uria lomvia_Thick-billed Murre
+Emberiza bruniceps_Red-headed Bunting
+Himantopus himantopus_Black-winged Stilt
+Loxia pytyopsittacus_Parrot Crossbill
+Emberiza aureola_Yellow-breasted Bunting
+Chroicocephalus genei_Slender-billed Gull
+Somateria mollissima_Common Eider
+Gavia adamsii_Yellow-billed Loon
+Falco naumanni_Lesser Kestrel
+Anthus hodgsoni_Olive-backed Pipit
+Recurvirostra avosetta_Pied Avocet
+Platalea leucorodia_Eurasian Spoonbill
+Burhinus oedicnemus_Eurasian Thick-knee
+Phylloscopus nitidus_Green Warbler
+Anthus richardi_Richard's Pipit
+Saxicola maurus_Siberian Stonechat
+Hydroprogne caspia_Caspian Tern
+Serinus serinus_European Serin
+Tyto alba_Barn Owl
+Phasianus colchicus_Ring-necked Pheasant
+Ardeola ralloides_Squacco Heron
+Sterna paradisaea_Arctic Tern
+Tetraogallus caucasicus_Caucasian Snowcock
+Monticola saxatilis_Rufous-tailed Rock-Thrush
+Gelochelidon nilotica_Gull-billed Tern
+Phylloscopus sindianus_Mountain Chiffchaff
+Luscinia megarhynchos_Common Nightingale
+Branta bernicla_Brant
+Calandrella brachydactyla_Greater Short-toed Lark
+Aegypius monachus_Cinereous Vulture
+Larus cachinnans_Caspian Gull
+Locustella lanceolata_Lanceolated Warbler
+Aquila heliaca_Imperial Eagle
+Certhia brachydactyla_Short-toed Treecreeper
+Lanius senator_Woodchat Shrike
+Cepphus grylle_Black Guillemot
+Somateria spectabilis_King Eider
+Anthus gustavi_Pechora Pipit
+Tarsiger cyanurus_Red-flanked Bluetail
+Anthropoides virgo_Demoiselle Crane
+Bubulcus ibis_Cattle Egret
+Anthus petrosus_Rock Pipit
+Alaudala heinei_Turkestan Short-toed Lark
+Oenanthe melanoleuca_Eastern Black-eared Wheatear
+Turdus torquatus_Ring Ouzel
+Ardea purpurea_Purple Heron
+Regulus ignicapilla_Common Firecrest
+Phylloscopus proregulus_Pallas's Leaf Warbler
+Calliope calliope_Siberian Rubythroat
+Aythya nyroca_Ferruginous Duck
+Branta leucopsis_Barnacle Goose
+Lagopus muta_Rock Ptarmigan
+Branta canadensis_Canada Goose
+Cuculus optatus_Oriental Cuckoo
+Saxicola rubicola_European Stonechat
+Gallinago stenura_Pin-tailed Snipe
